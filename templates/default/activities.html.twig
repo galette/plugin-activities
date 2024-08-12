@@ -1,0 +1,112 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+{% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% set nb = nb_activities %}
+
+{% set form = {
+    'order': {
+        'name': 'activities_activities'
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%1$s activity", "%1$s activities", nb, "activities")|replace({"%1$s": nb}),
+        'route': {
+            'name': 'filter-activitieslist'
+        }
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block infoline_actions %}
+    <a
+            class="ui tiny labeled icon button"
+            href="{{ url_for("activities_activity_add") }}"
+    >
+        <i class="plus circle green icon" aria-hidden="true"></i>
+        {{ _T('New activity', 'activities') }}
+    </a>
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': '#'},
+        {'label': _T("Name", "activities"), order: constant('GaletteActivities\\Repository\\Activities::ORDERBY_NAME')},
+        {'label': _T("Type", "activities")},
+        {'label': _T("Price", "activities")},
+        {'label': _T("Creation date", "activities"), order: constant('GaletteActivities\\Repository\\Activities::ORDERBY_DATE')},
+        {'label': _T("Group", "activities")},
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for ordre, activity in activities %}
+        <tr class="{{ loop.index is odd ? 'odd' : 'even' }}">
+            <td class="right" data-scope="id">
+                {% if preferences.pref_show_id %}
+                    {{ activity.getId() }}
+                {% else %}
+                    {{ ordre + 1 + (filters.current_page - 1) * numrows }}
+                {% endif %}
+            </td>
+            <td class="nowrap username_row" data-scope="row">
+                {% set aid = activity.getId() %}
+                <a href="{{ url_for("activities_activity_edit", {"id": aid}) }}">{{ activity.getName() }}</a>
+            </td>
+            <td data-col-label="{{ _T("Type", "activities") }}">{{ activity.getType() }}</td>
+            <td data-col-label="{{ _T("Price", "activities") }}">{% if activity.getPrice() %}{{ activity.getPrice()|number_format(2) }}{% endif %}</td>
+            <td data-col-label="{{ _T("Creation date", "activities") }}">{{ activity.getCreationDate() }}</td>
+            <td data-col-label="{{ _T("Group", "activities") }}">{%  if activity.getGroup() %}{{ activity.getGroup().getFullName() }}{% endif %}</td>
+            <td class="center nowrap actions_row">
+                {% set actions = [
+                    {
+                        'label': _T("%1$s: edit information", "activities")|replace({"%1$s": activity.getName()}),
+                        'route': {
+                        'name': 'activities_activity_edit',
+                            'args': {'id': aid}
+                        },
+                        'icon': 'edit'
+                    },
+                    {
+                        'label': _T("%1$s: remove from database", "activities")|replace({"%1$s": activity.getName()}),
+                        'route': {
+                        'name': 'activities_remove_activity',
+                            'args': {'id': aid}
+                        },
+                        'icon': 'trash red',
+                        'extra_class': 'delete'
+                    }
+
+                ] %}
+
+                {% for action in actions %}
+                    {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
+                {% endfor %}
+            </td>
+        </tr>
+    {% else %}
+        <tr><td colspan="6" class="emptylist">{{ _T("No activity has been found", "activities") }}</td></tr>
+    {% endfor %}
+{% endblock %}

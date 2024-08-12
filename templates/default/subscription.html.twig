@@ -1,0 +1,113 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+{% extends "page.html.twig" %}
+
+{% block content %}
+    <form class="ui form" action="{% if subscription.getId() %}{{ url_for("activities_storesubscription_edit", {"id": subscription.getId()}) }}{% else %}{{ url_for("activities_storesubscription_add") }}{% endif %}" method="post" id="modifform" enctype="multipart/form-data">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Subscription information", "activities") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/date.html.twig" with {
+                    id: 'subscription_date',
+                    value: subscription.getSubscriptionDate(),
+                    label: _T("Subscription date", "activities"),
+                    required: true
+                } %}
+
+                {% include "components/forms/date.html.twig" with {
+                    id: 'end_date',
+                    value: subscription.getEndDate(),
+                    label: _T("End date", "activities"),
+                    required: true
+                } %}
+
+
+                {% set activities_list_values = {(-1): _T("Select an activity", "activities")} %}
+                {% for activity in activities %}
+                    {% set activities_list_values = activities_list_values + {(activity.getId()): activity.getName()} %}
+                {% endfor %}
+
+                {% include "components/forms/select.html.twig" with {
+                    id: 'activity',
+                    value: subscription.getActivityId(),
+                    values: activities_list_values,
+                    label: _T("Activity", "activities"),
+                    required: true
+                } %}
+
+                {% include 'components/forms/member_dropdown.html.twig' with {
+                    'required': true,
+                    'component_id': 'member_elt',
+                    'id': 'member',
+                    'label': _T("Member"),
+                    'value': subscription.getMemberId()
+                } %}
+
+                {% include "components/forms/textarea.html.twig" with {
+                    id: 'comment',
+                    value: subscription.getComment(),
+                    label: _T("Comment", "activities")
+                } %}
+            </div>
+        </div>
+
+    {% if login.isAdmin() or login.isStaff() %}
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("Financial information", "activities") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: 'payment_amount',
+                    value: subscription.getAmount(),
+                    label: _T("Amount", "activities"),
+                } %}
+
+                <div class="three fields">
+                {% include "components/forms/payment_types.html.twig" with {
+                    show_inline: true,
+                    current: subscription.getPaymentMethod(),
+                    varname: "payment_method"
+                } %}
+
+                {% include "components/forms/checkbox.html.twig" with {
+                    id: 'paid',
+                    value: subscription.isPaid(),
+                    label: _T("Paid", "events"),
+                    checked: subscription.isPaid()
+                } %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="save" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="id" id="id" value="{{ subscription.getId() }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+    </form>
+{% endblock %}

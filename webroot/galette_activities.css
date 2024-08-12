@@ -1,0 +1,10 @@
+.subscription-notpaid {
+    background-color: #FFDDDD!important;
+    vertical-align: top;
+}
+
+.subscription-paid {
+    background-color: #DDFFDD!important;
+    vertical-align: top;
+}
+

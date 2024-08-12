@@ -1,0 +1,103 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+{% extends "page.html.twig" %}
+
+{% block content %}
+    <form action="{% if activity.getId() %}{{ url_for("activities_storeactivity_edit", {"id": activity.getId()}) }}{% else %}{{ url_for("activities_storeactivity_add") }}{% endif %}" method="post" class="ui form">
+        <div class="ui styled fluid accordion field">
+            <div class="active title">
+                <i class="icon dropdown"></i>
+                {{ _T("General information", "activities") }}
+            </div>
+            <div class="active content">
+                {% include "components/forms/text.html.twig" with {
+                    id: 'name',
+                    value: activity.getName(),
+                    label: _T("Name", "activities"),
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'type',
+                    value: activity.getType(),
+                    label: _T("Type", "activities"),
+                } %}
+
+                {% include "components/forms/text.html.twig" with {
+                    id: 'price',
+                    value: activity.getPrice(),
+                    label: _T("Price", "activities"),
+                } %}
+
+                {% set group_list_values = {(0): _T("Select a group")} %}
+                {% for group in groups %}
+                    {% set group_list_values = group_list_values + {(group.getId()): group.getIndentName()} %}
+                {% endfor %}
+
+                {% set group_id = null %}
+                {% if activity.getGroup() is not null %}
+                    {% set group_id = activity.getGroup().getID() %}
+                {% endif %}
+                {% include "components/forms/select.html.twig" with {
+                    id: 'id_group',
+                    value: group_id,
+                    values: group_list_values,
+                    label: _T("Attach to group", "events"),
+                    title: _T("Group to attach members that subscribes to activity.", "activities"),
+                    raw_labels: true
+                } %}
+
+                {% include "components/forms/textarea.html.twig" with {
+                    id: 'comment',
+                    value: activity.getComment(),
+                    label: _T("Comment", "activities"),
+                } %}
+            </div>
+        </div>
+
+        <div class="ui basic center aligned fitted segment">
+            <button type="submit" name="valid" class="action ui labeled icon primary button">
+                <i class="save icon"></i> {{ _T("Save") }}
+            </button>
+            <input type="hidden" name="id" id="id" value="{{ activity.getId() }}"/>
+            {% include "components/forms/csrf.html.twig" %}
+        </div>
+     </form>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(function() {
+            $('#meal, #lodging').on('change', function() {
+                var _this = $(this);
+                if (!_this.is(':checked')) {
+                    $('#' + _this.attr('id') + '_required').prop('checked', false);
+                }
+            });
+            $('#meal_required, #lodging_required').on('change', function() {
+                var _this = $(this);
+                if (_this.is(':checked')) {
+                    $('#' + _this.attr('id').replace(/_required/, '')).prop('checked', true);
+                }
+            });
+        });
+    </script>
+{% endblock %}

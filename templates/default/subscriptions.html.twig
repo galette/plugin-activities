@@ -1,0 +1,248 @@
+{#
+/**
+ * Copyright © 2003-2024 The Galette Team
+ *
+ * This file is part of Galette (https://galette.eu).
+ *
+ * Galette is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Galette is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Galette. If not, see <http://www.gnu.org/licenses/>.
+ */
+#}
+{% extends 'elements/list.html.twig' %}
+{% import "macros.twig" as macros %}
+
+{% set nb = nb_subscriptions %}
+
+{% set form = {
+    'order': {
+        'name': 'activities_subscriptions'
+    }
+} %}
+
+{% block infoline %}
+    {% set infoline = {
+        'label': _Tn("%1$s subscription", "%1$s subscriptions", nb, "activities")|replace({"%1$s": nb}),
+        'route': {
+            'name': 'activities_filter-subscriptionslist'
+        }
+    } %}
+    {{ parent() }}
+{% endblock %}
+
+{% block infoline_actions %}
+    <a
+            class="ui tiny labeled icon button"
+            href="{{ url_for("activities_subscription_add") }}"
+    >
+        <i class="plus circle green icon" aria-hidden="true"></i>
+        {{ _T('New subscription', 'activities') }}
+    </a>
+{% endblock %}
+
+{% block header %}
+    {% set columns = [
+        {'label': '#'},
+        {'label': _T("Activity", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_ACTIVITY')},
+        {'label': _T("Member"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_MEMBER')},
+        {'label': _T("Subscription date", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_SUBSCRIPTIONDATE')},
+        {'label': _T("End date", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_ENDDATE')},
+        {'label': _T("Paid", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_PAID')}
+    ] %}
+    {{ parent() }}
+{% endblock %}
+
+{% block search %}
+    <form action="{{ url_for("activities_filter-subscriptionslist") }}" method="post" id="filtre" class="ui form">
+    <div class="ui secondary yellow segment">
+        <div class="ui three fields">
+            <div class="field">
+                <label for="activity_filter">{{ _T("Activity", "activities") }}</label>
+                <select name="activity_filter" id="activity_filter" required="required">
+                    <option value="-1">{{ _T("All activities", "activities") }}</option>
+                    {% for activity in activities %}
+                        <option value="{{ activity.getId() }}"{% if filters.activity_filter == activity.getId() %} selected="selected"{% endif %}>{{ activity.getName() }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="field">
+                {% include 'components/forms/member_dropdown.html.twig' with {
+                    'required': true,
+                    'component_id': 'member_filter_elt',
+                    'id': 'member_filter',
+                    'label': _T("Member"),
+                    'value': filters.member_filter,
+                    'component_class': 'field',
+                    'placeholder': _T("Search or pick a member", "activities"),
+                } %}
+            </div>
+            <div class="field">
+                {# payment type #}
+                {% include "components/forms/payment_types.html.twig" with {
+                    current: filters.payment_type_filter,
+                    varname: "payment_type_filter",
+                    empty: {"value": -1, "label": _T("All payment types", "activities")}
+                } %}
+            </div>
+        </div>
+        <div class="ui two fields">
+            <div class="field">
+                <label for="date_field">{{ _T("Date type", "activities") }}</label>
+                <select name="date_field" id="date_field" class="ui search dropdown">
+                    <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_END") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_END') %} selected="selected"{% endif %}>{{ _T("End") }}</option>
+                    <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_SUBSCRIPTION") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_SUBSCRIPTION') %} selected="selected"{% endif %}>{{ _T("Subscription", "activities") }}</option>
+                </select>
+            </div>
+            <div class="two fields">
+                <div class="field">
+                    <label for="start_date_filter">{{ _T("since") }}</label>
+                    <div class="ui calendar" id="subscription-rangestart">
+                        <div class="ui input left icon">
+                            <i class="calendar icon" aria-hidden="true"></i>
+                            <input placeholder="{{ _T("yyyy-mm-dd format") }}" type="text" name="start_date_filter" id="start_date_filter" maxlength="10" size="10" value="{{ filters.start_date_filter }}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="end_date_filter">{{ _T("until") }}</label>
+                    <div class="ui calendar" id="subscription-rangeend">
+                        <div class="ui input left icon">
+                            <i class="calendar icon" aria-hidden="true"></i>
+                            <input placeholder="{{ _T("yyyy-mm-dd format") }}" type="text" name="end_date_filter" id="end_date_filter" maxlength="10" size="10" value="{{ filters.end_date_filter }}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <div class="inline fields">
+                    <label for="email_filter">{{ _T("Paid subscription:", "activities") }}</label>
+                    <div class="field inline">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paid_filter" id="filter_dc_paid" value="{{ constant('GaletteActivities\\Repository\\Subscriptions::FILTER_DC_PAID') }}"{% if filters.paid_filter == constant('GaletteActivities\\Repository\\Subscriptions::FILTER_DC_PAID') %} checked="checked"{% endif %}>
+                            <label for="filter_dc_paid" >{{ _T("Don't care") }}</label>
+                        </div>
+                    </div>
+                    <div class="field inline">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paid_filter" id="filter_paid" value="{{ constant('GaletteActivities\\Repository\\Subscriptions::FILTER_PAID') }}"{% if filters.paid_filter == constant('GaletteActivities\\Repository\\Subscriptions::FILTER_PAID') %} checked="checked"{% endif %}>
+                            <label for="filter_paid" >{{ _T("Paid", "activities") }}</label>
+                        </div>
+                    </div>
+                    <div class="field inline">
+                        <div class="ui radio checkbox">
+                            <input type="radio" name="paid_filter" id="filter_not_paid" value="{{ constant('GaletteActivities\\Repository\\Subscriptions::FILTER_NOT_PAID') }}"{% if filters.paid_filter == constant('GaletteActivities\\Repository\\Subscriptions::FILTER_NOT_PAID') %} checked="checked"{% endif %}>
+                            <label for="filter_not_paid" >{{ _T("Not paid", "activities") }}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui right aligned basic fitted segment field flexend">
+                <button type="submit"  class="tooltip action ui labeled icon primary button" title="{{ _T('Apply filters') }}" name="filter">
+                    <i class="search icon"></i>
+                    {{ _T('Filter') }}
+                </button>
+                <button type="submit" name="clear_filter" class="ui labeled icon button tooltip" title="{{ _T('Reset all filters to defaults') }}">
+                    <i class="trash alt red icon" aria-hidden="true"></i>
+                    {{ _T('Clear filter') }}
+                </button>
+            </div>
+        </div>
+        {% include "components/forms/csrf.html.twig" %}
+    </div>
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {% if nb > 0 %}
+    <tr>
+        <td class="right" colspan="10">
+            {{ _T("Found subscriptions total %f", "activities")|replace({'%f': subscriptions.getSum()}) }}
+        </td>
+    </tr>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% for ordre, subscription in subscriptions_list %}
+        {% set rclass = subscription.getRowClass() %}
+                <tr>
+                    <td class="{{ rclass }} right" data-scope="id">
+                        {% if preferences.pref_show_id %}
+                            {{ subscription.getId() }}
+                        {% else %}
+                            {{ ordre + 1 + (filters.current_page - 1) * numrows }}
+                        {% endif %}
+                    </td>
+                    <td class="{{ rclass }} nowrap username_row" data-scope="row">
+                        {% set bid = subscription.getId() %}
+                        <input type="checkbox" name="entries_sel[]" value="{{ bid }}"/>
+                        <a href="{{ url_for("activities_activity_edit", {"id": subscription.getActivityId()}) }}">{{ subscription.getActivity().getName() }}</a>
+                    </td>
+                    <td class="{{ rclass }}" data-col-label="{{ _T("Member") }}">
+                        <a href="{{ url_for("member", {"id": subscription.getMemberId()}) }}">
+                            {{ subscription.getMember().sfullname }}
+                        </a>
+                    </td>
+                    <td class="{{ rclass }}" data-col-label="{{ _T("Subscription date", "activities") }}">{{ subscription.getSubscriptionDate() }}</td>
+                    <td class="{{ rclass }}" data-col-label="{{ _T("End date", "activities") }}">{{ subscription.getEndDate() }}</td>
+                    <td class="{{ rclass }} center" data-col-label="{% if subscription.isPaid() %}{{ _T("Paid", "activities") }}{% else %}{{ _T("Not paid", "activities") }}{% endif %}">
+                        <i class="money bill wave{% if not subscription.isPaid() %} red{% endif %} icon tooltip" data-html="{% if subscription.isPaid() %}{{ _T("Paid", "activities") }}{% else %}{{ _T("Not paid", "activities") }}{% endif %}"></i>
+                        <span class="visually-hidden">
+                        {% if subscription.isPaid() %}
+                            {{ _T("Paid", "activities") }}
+                        {% else %}
+                            {{ _T("Not paid", "activities") }}"
+                        {% endif %}
+                        </span>
+                    </td>
+                    <td class="{{ rclass }} center nowrap actions_row">
+            {% set actions = [] %}
+            {% if login.isAdmin() or login.isStaff() or (login.isGroupManager() and subscription.getActivity().getGroup() in login.managed_groups) %}
+                {% set actions = (actions ?? [])|merge([
+                    {
+                        'label': _T("Edit subscription", "activities"),
+                        'route': {
+                        'name': 'activities_subscription_edit',
+                            'args': {'id': bid}
+                        },
+                        'icon': 'edit',
+                    },
+
+                ]) %}
+            {% endif %}
+
+            {% if login.isAdmin() or login.isStaff() %}
+                {% set actions = (actions ?? [])|merge([
+                    {
+                        'label': _T("Remove from database", "activities"),
+                        'route': {
+                        'name': 'activities_remove_subscription',
+                            'args': {'id': bid}
+                        },
+                        'icon': 'trash red',
+                        'extra_class': 'delete'
+                    }
+                ]) %}
+            {% endif %}
+
+            {% for action in actions %}
+                {{ macros.drawListAction(action.label, action.route, action.icon, action.extra_class|default('')) }}
+            {% endfor %}
+                    </td>
+                </tr>
+    {% else %}
+                <tr><td colspan="9" class="emptylist">{{ _T("No subscription has been found", "activities") }}</td></tr>
+    {% endfor %}
+{% endblock %}
