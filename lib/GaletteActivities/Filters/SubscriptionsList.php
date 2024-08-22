@@ -152,7 +152,6 @@ class SubscriptionsList extends Pagination
                     default:
                         return $this->$name;
                 }
-
             }
         }
 
