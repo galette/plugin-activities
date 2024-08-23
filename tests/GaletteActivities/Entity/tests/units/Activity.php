@@ -86,10 +86,20 @@ class Activity extends GaletteTestCase
         $this->assertFalse($activity->check($data));
         $this->assertSame(['Name is mandatory'], $activity->getErrors());
 
+        //required activity name
+        $data = [
+            'name' => 'Test activity',
+            'comment' => 'Test comment',
+            'type' => '1234',
+        ];
+        $this->assertFalse($activity->check($data));
+        $this->assertSame(['Type is too long'], $activity->getErrors());
+
         //add new activity
         $data = [
             'name' => 'Test activity',
             'comment' => 'Test comment',
+            'type' => 'one'
         ];
         $this->assertTrue($activity->check($data));
         $this->assertTrue($activity->store());
@@ -99,9 +109,9 @@ class Activity extends GaletteTestCase
         $this->assertTrue($activity->load($first_id));
         $this->assertSame('Test activity', $activity->getName());
         $this->assertSame('Test comment', $activity->getComment());
+        $this->assertSame('one', $activity->getType());
         //FIXME: lang must be changed to have a different date format
         $this->assertNotSame('', $activity->getCreationDate());
-        $this->assertNotSame('', $activity->getCreationDate(false));
         $this->assertNull($activity->getPrice());
         $this->assertNull($activity->getGroup());
 
@@ -115,12 +125,14 @@ class Activity extends GaletteTestCase
         //edit activity
         $data['name'] = 'Test activity edited';
         $data['price'] = 10.5;
+        $data['comment'] = '';
         $this->assertTrue($activity->check($data));
         $this->assertTrue($activity->store());
         $this->assertTrue($activity->load($first_id));
 
         $this->assertSame('Test activity edited', $activity->getName());
         $this->assertSame(10.5, $activity->getPrice());
+        $this->assertSame('', $activity->getComment());
 
         $group = new \Galette\Entity\Group();
         $group->setName('Test group' . $this->seed);

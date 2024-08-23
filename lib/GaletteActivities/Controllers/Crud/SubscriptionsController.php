@@ -355,7 +355,7 @@ class SubscriptionsController extends AbstractPluginController
         // Validation
         $valid = $subscription->check($post);
         if ($valid !== true) {
-            $error_detected = array_merge($error_detected, $valid);
+            $error_detected = array_merge($error_detected, $subscription->getErrors());
         }
 
         if (count($error_detected) == 0 && isset($post['save'])) {
