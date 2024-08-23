@@ -45,7 +45,6 @@ class Subscription
     public const PK = 'id_subscription';
 
     private Db $zdb;
-    private Login $login;
     /** @var array<string> */
     private array $errors;
 
@@ -65,16 +64,14 @@ class Subscription
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb   Database instance
-     * @param Login                                   $login Login instance
-     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
-     *                                                       a specific subscription, or null to just
-     *                                                       instanciate object
+     * @param Db                                      $zdb  Database instance
+     * @param null|int|ArrayObject<string,int|string> $args Either a ResultSet row or its id for to load
+     *                                                      a specific subscription, or null to just
+     *                                                      instanciate object
      */
-    public function __construct(Db $zdb, Login $login, int|ArrayObject|null $args = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
-        $this->login = $login;
         $this->setFields();
 
         if (is_int($args)) {
@@ -179,9 +176,9 @@ class Subscription
      * @param array<string,mixed> $values All values to check, basically the $_POST array
      *                                    after sending the form
      *
-     * @return true|array<string>
+     * @return boolean
      */
-    public function check(array $values): array|bool
+    public function check(array $values): bool
     {
         $this->errors = array();
 
@@ -356,7 +353,7 @@ class Subscription
     public function getActivity(): ?Activity
     {
         if (isset($this->id_activity)) {
-            $this->activity = new Activity($this->zdb, $this->login, $this->id_activity);
+            $this->activity = new Activity($this->zdb, $this->id_activity);
         }
         return $this->activity;
     }
@@ -471,7 +468,7 @@ class Subscription
     public function setActivity(int $activity): self
     {
         $this->id_activity = $activity;
-        $this->activity = new Activity($this->zdb, $this->login, $this->id_activity);
+        $this->activity = new Activity($this->zdb, $this->id_activity);
         return $this;
     }
 

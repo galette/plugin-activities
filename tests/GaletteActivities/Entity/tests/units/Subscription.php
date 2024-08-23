@@ -60,7 +60,7 @@ class Subscription extends GaletteTestCase
      */
     public function testEmpty(): void
     {
-        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb, $this->login);
+        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb);
 
         $this->assertNull($subscription->getId());
         $this->assertNull($subscription->getActivityId());
@@ -85,14 +85,14 @@ class Subscription extends GaletteTestCase
      */
     public function testCrud(): void
     {
-        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb, $this->login);
+        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb);
         $subscriptions = new \GaletteActivities\Repository\Activities($this->zdb, $this->login, $this->preferences);
 
         //ensure the table is empty
         $this->assertCount(0, $subscriptions->getList());
 
         //bootstrap data
-        $activity = new \GaletteActivities\Entity\Activity($this->zdb, $this->login);
+        $activity = new \GaletteActivities\Entity\Activity($this->zdb);
         $data = [
             'name' => 'Activity for subscriptions',
             'comment' => 'Comment ' . $this->seed,
@@ -186,7 +186,7 @@ class Subscription extends GaletteTestCase
         $this->assertSame($member_one->id, $subscription->getMember()->id);
 
         //reload
-        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb, $this->login, $subscription_id);
+        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb, $subscription_id);
         $data += [
             'paid' => 1,
             'payment_amount' => 21.0,
@@ -213,7 +213,7 @@ class Subscription extends GaletteTestCase
      */
     public function testLoadError(): void
     {
-        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb, $this->login);
+        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb);
         $this->assertFalse($subscription->load(999));
     }
 }

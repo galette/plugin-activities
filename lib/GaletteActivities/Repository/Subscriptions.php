@@ -45,7 +45,6 @@ use Laminas\Db\Sql\Select;
 class Subscriptions
 {
     private Db $zdb;
-    private Login $login;
     private SubscriptionsList $filters;
     private int $count;
     private float $sum;
@@ -64,13 +63,11 @@ class Subscriptions
      * Constructor
      *
      * @param Db                 $zdb     Database instance
-     * @param Login              $login   Login instance
      * @param ?SubscriptionsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, SubscriptionsList $filters = null)
+    public function __construct(Db $zdb, SubscriptionsList $filters = null)
     {
         $this->zdb = $zdb;
-        $this->login = $login;
 
         if ($filters === null) {
             $this->filters = new SubscriptionsList();
@@ -102,7 +99,7 @@ class Subscriptions
 
             $subscriptions = [];
             foreach ($results as $row) {
-                $subscription = new Subscription($this->zdb, $this->login, $row);
+                $subscription = new Subscription($this->zdb, $row);
                 $subscriptions[] = $subscription;
             }
 

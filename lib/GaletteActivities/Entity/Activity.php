@@ -44,7 +44,6 @@ class Activity
     public const PK = 'id_activity';
 
     private Db $zdb;
-    private Login $login;
     /** @var array<string> */
     private array $errors = [];
 
@@ -60,16 +59,14 @@ class Activity
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb   Database instance
-     * @param Login                                   $login Login instance
-     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
-     *                                                       a specific activity, or null to just
-     *                                                       instanciate object
+     * @param Db                                      $zdb  Database instance
+     * @param null|int|ArrayObject<string,int|string> $args Either a ResultSet row or its id for to load
+     *                                                      a specific activity, or null to just
+     *                                                      instanciate object
      */
-    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, int|ArrayObject $args = null)
     {
         $this->zdb = $zdb;
-        $this->login = $login;
         $this->setFields();
 
         if (is_int($args) && $args > 0) {

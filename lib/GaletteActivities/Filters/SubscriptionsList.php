@@ -42,6 +42,8 @@ use GaletteActivities\Repository\Subscriptions;
  * @property int $paid_filter
  * @property int $payment_type_filter
  * @property int $date_field
+ * @property array<int> $selected
+ * @property string $query
  */
 class SubscriptionsList extends Pagination
 {

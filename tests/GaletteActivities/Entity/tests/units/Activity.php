@@ -57,7 +57,7 @@ class Activity extends GaletteTestCase
      */
     public function testEmpty(): void
     {
-        $activity = new \GaletteActivities\Entity\Activity($this->zdb, $this->login);
+        $activity = new \GaletteActivities\Entity\Activity($this->zdb);
 
         $this->assertNull($activity->getId());
         $this->assertSame('',$activity->getName());
@@ -73,7 +73,7 @@ class Activity extends GaletteTestCase
      */
     public function testCrud(): void
     {
-        $activity = new \GaletteActivities\Entity\Activity($this->zdb, $this->login);
+        $activity = new \GaletteActivities\Entity\Activity($this->zdb);
         $activities = new \GaletteActivities\Repository\Activities($this->zdb, $this->login, $this->preferences);
 
         //ensure the table is empty
@@ -140,7 +140,7 @@ class Activity extends GaletteTestCase
         $data['id_group'] = $group->getId();
         $this->assertTrue($activity->check($data));
         $this->assertTrue($activity->store());
-        $activity = new \GaletteActivities\Entity\Activity($this->zdb, $this->login, $first_id);
+        $activity = new \GaletteActivities\Entity\Activity($this->zdb, $first_id);
 
         $this->assertInstanceOf(\Galette\Entity\Group::class, $activity->getGroup());
         $this->assertSame($group->getId(), $activity->getGroup()->getId());
@@ -157,7 +157,7 @@ class Activity extends GaletteTestCase
      */
     public function testLoadError(): void
     {
-        $activity = new \GaletteActivities\Entity\Activity($this->zdb, $this->login);
+        $activity = new \GaletteActivities\Entity\Activity($this->zdb);
         $this->assertFalse($activity->load(999));
     }
 }
