@@ -287,6 +287,12 @@ class Subscription
                         _T("Subscription added", "activities"),
                         $this->getActivity()->getName()
                     );
+
+                    //link member to activity group, if any
+                    $group = $this->activity->getGroup();
+                    if ($group !== null) {
+                        $group->addMember($this->member);
+                    }
                 } else {
                     $hist->add(_T("Fail to add new subscription.", "activities"));
                     throw new \Exception(

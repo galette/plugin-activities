@@ -47,6 +47,9 @@ class Subscription extends GaletteTestCase
         $delete = $this->zdb->delete(ACTIVITIES_PREFIX . \GaletteActivities\Entity\Activity::TABLE);
         $this->zdb->execute($delete);
 
+        $delete = $this->zdb->delete(\Galette\Entity\Group::GROUPSUSERS_TABLE);
+        $this->zdb->execute($delete);
+
         $delete = $this->zdb->delete(\Galette\Entity\Group::TABLE);
         $this->zdb->execute($delete);
 
@@ -101,7 +104,22 @@ class Subscription extends GaletteTestCase
         $this->assertTrue($activity->check($data));
         $this->assertTrue($activity->store());
 
+        $group = new \Galette\Entity\Group();
+        $group->setName('Subscribed group');
+        $this->assertTrue($group->store());
+
+        $gactivity = new \GaletteActivities\Entity\Activity($this->zdb);
+        $data = [
+            'name' => 'Activity with a group',
+            'comment' => 'Comment for group/activity ' . $this->seed,
+            'price' => 5.0,
+            \Galette\Entity\Group::PK => $group->getId()
+        ];
+        $this->assertTrue($gactivity->check($data));
+        $this->assertTrue($gactivity->store());
+
         $activity_id = $activity->getId();
+        $gactivity_id = $gactivity->getId();
         $member_one = $this->getMemberOne();
 
         //Missing required data
@@ -170,6 +188,9 @@ class Subscription extends GaletteTestCase
         $this->assertTrue($subscription->store());
         $subscription_id = $subscription->getId();
 
+        //member is not part of any group
+        $this->assertCount(0,$member_one->getGroups());
+
         $this->assertFalse($subscription->isPaid());
         //by default, amount is set to activity price
         $this->assertSame(42.0, $subscription->getAmount());
@@ -204,6 +225,23 @@ class Subscription extends GaletteTestCase
         //remove subscription
         $this->assertTrue($subscription->remove());
         $this->assertFalse($activity->load($subscription_id));
+
+        //create a subscription with a group
+        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb);
+        $data = [
+            'activity' => $gactivity_id,
+            'member' => $member_one->id,
+            'subscription_date' => (new \DateTime())->format('Y-m-d'),
+            'end_date' => (new \DateTime())->modify('+1 year')->format('Y-m-d'),
+            'comment' => 'Comment ' . $this->seed,
+        ];
+        $this->assertTrue($subscription->check($data));
+        $this->assertTrue($subscription->store());
+
+        //member is part activity linked group
+        $member_one->loadGroups();
+        $groups = $member_one->getGroups();
+        $this->assertCount(1, $groups);
     }
 
     /**
