@@ -125,7 +125,9 @@ class Subscription
         $this->setActivity((int)$r->{Activity::PK});
         $this->setMember((int)$r->{Adherent::PK});
         $this->paid = (bool)$r->is_paid;
-        $this->payment_amount = (float)$r->payment_amount;
+        if ($r->payment_amount !== null) {
+            $this->payment_amount = (float)$r->payment_amount;
+        }
         $this->payment_method = (int)$r->payment_method;
         $this->creation_date = $r->creation_date;
         $this->subscription_date = $r->subscription_date;

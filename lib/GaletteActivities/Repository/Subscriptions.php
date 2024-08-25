@@ -25,13 +25,8 @@ namespace GaletteActivities\Repository;
 
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
-use Laminas\Db\Sql\Predicate;
-use Laminas\Db\Sql\Predicate\PredicateSet;
-use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Adherent;
-use Galette\Entity\Group;
-use Galette\Repository\Groups;
 use GaletteActivities\Entity\Activity;
 use GaletteActivities\Entity\Subscription;
 use GaletteActivities\Filters\SubscriptionsList;
@@ -54,6 +49,7 @@ class Subscriptions
     public const ORDERBY_SUBSCRIPTIONDATE = 2;
     public const ORDERBY_ENDDATE = 3;
     public const ORDERBY_PAID = 3;
+    public const ORDERBY_AMOUNT = 4;
 
     public const FILTER_DC_PAID = 0;
     public const FILTER_PAID = 1;
@@ -355,6 +351,11 @@ class Subscriptions
             case self::ORDERBY_PAID:
                 if ($this->canOrderBy('id_paid', $fields)) {
                     $order[] = 'is_paid ' . $this->filters->getDirection();
+                }
+                break;
+            case self::ORDERBY_AMOUNT:
+                if ($this->canOrderBy('payment_amount', $fields)) {
+                    $order[] = 'payment_amount ' . $this->filters->getDirection();
                 }
                 break;
         }
