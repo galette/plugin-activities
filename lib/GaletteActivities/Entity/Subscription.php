@@ -365,6 +365,11 @@ class Subscription
         return $this->activity;
     }
 
+    /**
+     * Get amount from activity
+     *
+     * @return float|null
+     */
     public function getAmountFromActivity(): ?float
     {
         $activity = $this->getActivity();
