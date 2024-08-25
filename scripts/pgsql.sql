@@ -46,6 +46,5 @@ CREATE TABLE galette_activities_subscriptions (
   subscription_date date NOT NULL,
   end_date date NOT NULL,
   comment text,
-  PRIMARY KEY (id_subscription),
-  UNIQUE (id_activity, id_adh)
+  PRIMARY KEY (id_subscription)
 );
