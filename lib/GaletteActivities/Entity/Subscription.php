@@ -199,7 +199,7 @@ class Subscription
         if (isset($values['payment_amount']) && !empty($values['payment_amount'])) {
             $this->payment_amount = (float)$values['payment_amount'];
         } else {
-            if ($this->getActivity()) {
+            if ($this->getActivity() && isset($values['save'])) {
                 $this->payment_amount = $this->getActivity()->getPrice();
             }
         }
@@ -363,6 +363,15 @@ class Subscription
             $this->activity = new Activity($this->zdb, $this->id_activity);
         }
         return $this->activity;
+    }
+
+    public function getAmountFromActivity(): ?float
+    {
+        $activity = $this->getActivity();
+        if ($activity !== null) {
+            return $this->getActivity()->getPrice();
+        }
+        return null;
     }
 
     /**

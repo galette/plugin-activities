@@ -182,8 +182,11 @@ class Subscription extends GaletteTestCase
             'subscription_date' => '2024-08-17',
             'end_date' => '2025-08-17',
             'comment' => 'Comment ' . $this->seed,
+            'save' => 1,
         ];
         $this->assertTrue($subscription->check($data));
+        $this->assertSame(42.0, $subscription->getAmount());
+        $this->assertSame(42.0, $subscription->getAmountFromActivity());
         $this->assertSame([], $subscription->getErrors());
         $this->assertTrue($subscription->store());
         $subscription_id = $subscription->getId();
@@ -214,6 +217,8 @@ class Subscription extends GaletteTestCase
             'payment_method' => 1,
         ];
         $this->assertTrue($subscription->check($data));
+        $this->assertSame(21.0, $subscription->getAmount());
+        $this->assertSame(42.0, $subscription->getAmountFromActivity());
         $this->assertTrue($subscription->store());
 
         $this->assertTrue($subscription->isPaid());

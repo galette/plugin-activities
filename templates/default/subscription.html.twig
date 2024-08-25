@@ -89,6 +89,7 @@
                     id: 'payment_amount',
                     value: subscription.getAmount(),
                     label: _T("Amount", "activities"),
+                    placeholder: subscription.getAmountFromActivity()
                 } %}
 
                 <div class="three fields">
@@ -115,4 +116,15 @@
             {% include "components/forms/csrf.html.twig" %}
         </div>
     </form>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('#activity').on('change', function() {
+            var _this = $(this);
+            var _val = _this.find('option:selected').val()
+            _this.parents('form').find('input[name=save]').remove();
+            _this.parents('form').submit();
+        });
+    </script>
 {% endblock %}
