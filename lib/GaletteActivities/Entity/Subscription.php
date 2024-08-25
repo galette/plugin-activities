@@ -53,10 +53,10 @@ class Subscription
     private ?Activity $activity = null;
     private int $id_member;
     private ?Adherent $member = null;
-    private bool $paid = false;
+    private bool $paid = true;
     private ?float $payment_amount = null;
     private int $payment_method = PaymentType::OTHER;
-    private ?string $creation_date = null;
+    private ?string $creation_date;
     private ?string $subscription_date = null;
     private ?string $end_date = null;
     private string $comment = '';
