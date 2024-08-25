@@ -192,7 +192,7 @@ class Subscription
         }
 
         //financial information
-        if (isset($values['paid'])) {
+        if (isset($values['paid']) && $values['paid']) {
             $this->paid = true;
         } else {
             $this->paid = false;

@@ -70,7 +70,7 @@ class Subscription extends GaletteTestCase
         $this->assertNull($subscription->getActivity());
         $this->assertNull($subscription->getMemberId());
         $this->assertNull($subscription->getMember());
-        $this->assertFalse($subscription->isPaid());
+        $this->assertTrue($subscription->isPaid());
         $this->assertNull($subscription->getAmount());
         $this->assertSame(6, $subscription->getPaymentMethod());
         $this->assertSame('Other', $subscription->getPaymentMethodName());
@@ -78,7 +78,7 @@ class Subscription extends GaletteTestCase
         $this->assertSame('', $subscription->getSubscriptionDate());
         $this->assertSame('', $subscription->getEndDate());
         $this->assertSame('', $subscription->getComment());
-        $this->assertSame('subscription-notpaid', $subscription->getRowClass());
+        $this->assertSame('subscription-paid', $subscription->getRowClass());
     }
 
     /**
@@ -212,7 +212,7 @@ class Subscription extends GaletteTestCase
         //reload
         $subscription = new \GaletteActivities\Entity\Subscription($this->zdb, $subscription_id);
         $data += [
-            'paid' => 1,
+            'paid' => 0,
             'payment_amount' => 21.0,
             'payment_method' => 1,
         ];
@@ -221,9 +221,9 @@ class Subscription extends GaletteTestCase
         $this->assertSame(42.0, $subscription->getAmountFromActivity());
         $this->assertTrue($subscription->store());
 
-        $this->assertTrue($subscription->isPaid());
+        $this->assertFalse($subscription->isPaid());
         $this->assertSame(21.0, $subscription->getAmount());
-        $this->assertSame('subscription-paid', $subscription->getRowClass());
+        $this->assertSame('subscription-notpaid', $subscription->getRowClass());
         $this->assertSame(1, $subscription->getPaymentMethod());
         $this->assertSame('Cash', $subscription->getPaymentMethodName());
 
