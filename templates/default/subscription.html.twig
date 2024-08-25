@@ -79,7 +79,6 @@
             </div>
         </div>
 
-    {% if login.isAdmin() or login.isStaff() %}
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
@@ -108,7 +107,6 @@
                 </div>
             </div>
         </div>
-    {% endif %}
         <div class="ui basic center aligned fitted segment">
             <button type="submit" name="save" class="action ui labeled icon primary button">
                 <i class="save icon"></i> {{ _T("Save") }}
