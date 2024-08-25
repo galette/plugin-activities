@@ -74,6 +74,7 @@ class Subscription
         $this->zdb = $zdb;
         $this->setFields();
 
+        $this->creation_date = date("Y-m-d");
         if (is_int($args)) {
             $this->load($args);
         } elseif (is_object($args)) {

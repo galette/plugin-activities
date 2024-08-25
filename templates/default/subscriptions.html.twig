@@ -98,6 +98,7 @@
             <div class="field">
                 <label for="date_field">{{ _T("Date type", "activities") }}</label>
                 <select name="date_field" id="date_field" class="ui search dropdown">
+                    <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_CREATION") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_CREATION') %} selected="selected"{% endif %}>{{ _T("Creation", "activities") }}</option>
                     <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_END") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_END') %} selected="selected"{% endif %}>{{ _T("End") }}</option>
                     <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_SUBSCRIPTION") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_SUBSCRIPTION') %} selected="selected"{% endif %}>{{ _T("Subscription", "activities") }}</option>
                 </select>

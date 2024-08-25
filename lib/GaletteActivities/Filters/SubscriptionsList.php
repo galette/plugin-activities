@@ -51,6 +51,7 @@ class SubscriptionsList extends Pagination
 
     public const DATE_END = 0;
     public const DATE_SUBSCRIPTION = 1;
+    public const DATE_CREATION = 2;
     //filters
     private string|int|null $activity_filter;
     private string|int|null $member_filter;

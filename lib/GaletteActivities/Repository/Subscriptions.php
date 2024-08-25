@@ -252,6 +252,9 @@ class Subscriptions
             }
 
             switch ($this->filters->date_field) {
+                case SubscriptionsList::DATE_CREATION:
+                    $field = 's.creation_date';
+                    break;
                 case SubscriptionsList::DATE_SUBSCRIPTION:
                     $field = 'subscription_date';
                     break;

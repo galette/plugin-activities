@@ -74,7 +74,7 @@ class Subscription extends GaletteTestCase
         $this->assertNull($subscription->getAmount());
         $this->assertSame(6, $subscription->getPaymentMethod());
         $this->assertSame('Other', $subscription->getPaymentMethodName());
-        $this->assertSame('', $subscription->getCreationDate());
+        $this->assertNotSame('', $subscription->getCreationDate());
         $this->assertSame('', $subscription->getSubscriptionDate());
         $this->assertSame('', $subscription->getEndDate());
         $this->assertSame('', $subscription->getComment());

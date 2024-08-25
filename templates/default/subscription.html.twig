@@ -29,6 +29,13 @@
             </div>
             <div class="active content">
                 {% include "components/forms/date.html.twig" with {
+                    id: 'creation_date',
+                    value: subscription.getCreationDate(),
+                    label: _T("Creation date", "activities"),
+                    required: true
+                } %}
+
+                {% include "components/forms/date.html.twig" with {
                     id: 'subscription_date',
                     value: subscription.getSubscriptionDate(),
                     label: _T("Subscription date", "activities"),
