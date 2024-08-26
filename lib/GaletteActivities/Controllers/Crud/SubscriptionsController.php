@@ -375,9 +375,12 @@ class SubscriptionsController extends AbstractPluginController
                 }
             } elseif ($store === false) {
                 //something went wrong :'(
-                $error_detected[] = _T("An error occurred while storing the subscription.", "activities");
-            } else {
-                $error_detected[] = $store;
+                $errors = $subscription->getErrors();
+                if (count($errors)) {
+                    $error_detected = array_merge($error_detected, $errors);
+                } else {
+                    $error_detected[] = _T("An error occurred while storing the subscription.", "activities");
+                }
             }
         }
 

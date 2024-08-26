@@ -256,15 +256,15 @@ class Subscription
         try {
             $this->zdb->connection->beginTransaction();
             $values = array(
-                Activity::PK        => $this->id_activity,
-                Adherent::PK        => $this->id_member,
-                'is_paid'           => ($this->paid ?:
-                                            ($this->zdb->isPostgres() ? 'false' : 0)),
-                'payment_method'    => $this->payment_method,
-                'payment_amount'    => $this->payment_amount,
+                Activity::PK => $this->id_activity,
+                Adherent::PK => $this->id_member,
+                'is_paid' => ($this->paid ?:
+                    ($this->zdb->isPostgres() ? 'false' : 0)),
+                'payment_method' => $this->payment_method,
+                'payment_amount' => $this->payment_amount,
                 'subscription_date' => $this->subscription_date,
-                'end_date'          => $this->end_date,
-                'comment'           => $this->comment
+                'end_date' => $this->end_date,
+                'comment' => $this->comment
             );
 
             if (!isset($this->id) || $this->id == '') {
@@ -323,6 +323,10 @@ class Subscription
 
             $this->zdb->connection->commit();
             return true;
+        } catch (\OverflowException $e) {
+            $this->zdb->connection->rollBack();
+            $this->errors[] = _T('Subscription already exists for this member and activity', 'activities');
+            return false;
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(

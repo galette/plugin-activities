@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-25 14:51+0200\n"
-"PO-Revision-Date: 2024-08-25 14:57+0200\n"
+"POT-Creation-Date: 2024-08-26 07:53+0200\n"
+"PO-Revision-Date: 2024-08-26 07:56+0200\n"
 "Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
 "Language-Team: none\n"
 "Language: ota\n"
@@ -18,7 +18,7 @@ msgid "Activities management"
 msgstr ""
 
 #: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:199
-#: ../lib/GaletteActivities/Entity/Subscription.php:559
+#: ../lib/GaletteActivities/Entity/Subscription.php:563
 #: ../tempcache/subscriptions.html.twig:102
 #: ../tempcache/subscriptions.html.twig:124
 #: ../tempcache/subscription.html.twig:109
@@ -60,16 +60,16 @@ msgstr ""
 msgid "Subscription has been modified."
 msgstr ""
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:378
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:382
 msgid "An error occurred while storing the subscription."
 msgstr ""
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:388
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:391
 msgid "Do not forget to store the subscription"
 msgstr ""
 
 #. TRANS: %1$s is the member name, %2$s the activity name.
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:491
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:494
 #, php-format
 msgid "Remove subscription for %1$s on %2$s"
 msgstr ""
@@ -124,14 +124,14 @@ msgid "Group"
 msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Activity.php:428
-#: ../lib/GaletteActivities/Entity/Subscription.php:579
+#: ../lib/GaletteActivities/Entity/Subscription.php:583
 #: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:181
 #: ../tempcache/subscription.html.twig:71
 msgid "Creation date"
 msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Activity.php:432
-#: ../lib/GaletteActivities/Entity/Subscription.php:591
+#: ../lib/GaletteActivities/Entity/Subscription.php:595
 #: ../tempcache/subscription.html.twig:121
 msgid "Comment"
 msgstr ""
@@ -164,26 +164,30 @@ msgstr ""
 msgid "Subscription updated"
 msgstr ""
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:563
-msgid "Member"
+#: ../lib/GaletteActivities/Entity/Subscription.php:328
+msgid "Subscription already exists for this member and activity"
 msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:567
-msgid "Is paid"
+msgid "Member"
 msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:571
+msgid "Is paid"
+msgstr ""
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:575
 #: ../tempcache/subscriptions.html.twig:102
 #: ../tempcache/subscriptions.html.twig:448
 #: ../tempcache/subscription.html.twig:138
 msgid "Amount"
 msgstr ""
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:575
+#: ../lib/GaletteActivities/Entity/Subscription.php:579
 msgid "Payment method"
 msgstr ""
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:583
+#: ../lib/GaletteActivities/Entity/Subscription.php:587
 #: ../tempcache/subscriptions.html.twig:102
 #: ../tempcache/subscriptions.html.twig:432
 #: ../tempcache/subscription.html.twig:77

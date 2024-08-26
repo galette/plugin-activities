@@ -60,8 +60,8 @@ class Activity extends GaletteTestCase
         $activity = new \GaletteActivities\Entity\Activity($this->zdb);
 
         $this->assertNull($activity->getId());
-        $this->assertSame('',$activity->getName());
-        $this->assertSame('',$activity->getCreationDate());
+        $this->assertSame('', $activity->getName());
+        $this->assertSame('', $activity->getCreationDate());
         $this->assertNull($activity->getPrice());
         $this->assertSame('', $activity->getComment());
     }

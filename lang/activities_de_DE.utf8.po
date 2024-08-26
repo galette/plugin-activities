@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-25 14:51+0200\n"
-"PO-Revision-Date: 2024-08-25 14:56+0200\n"
+"POT-Creation-Date: 2024-08-26 07:53+0200\n"
+"PO-Revision-Date: 2024-08-26 07:55+0200\n"
 "Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/galette/events-"
 "plugin/de/>\n"
@@ -26,7 +26,7 @@ msgid "Activities management"
 msgstr "Aktivitätsverwaltung"
 
 #: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:199
-#: ../lib/GaletteActivities/Entity/Subscription.php:559
+#: ../lib/GaletteActivities/Entity/Subscription.php:563
 #: ../tempcache/subscriptions.html.twig:102
 #: ../tempcache/subscriptions.html.twig:124
 #: ../tempcache/subscription.html.twig:109
@@ -75,19 +75,19 @@ msgstr "Neue Buchung erfolgreich hinzugefügt."
 msgid "Subscription has been modified."
 msgstr "Aktivität wurde verändert."
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:378
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:382
 #, fuzzy
 msgid "An error occurred while storing the subscription."
 msgstr "Fehler beim Speichern der Buchung."
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:388
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:391
 #, fuzzy
 #| msgid "Do not forget to store the booking"
 msgid "Do not forget to store the subscription"
 msgstr "Vergessen Sie nicht die Buchung zu speichern"
 
 #. TRANS: %1$s is the member name, %2$s the activity name.
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:491
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:494
 #, fuzzy, php-format
 msgid "Remove subscription for %1$s on %2$s"
 msgstr "Lösche Buchung für %1$s bei %2$s"
@@ -144,14 +144,14 @@ msgid "Group"
 msgstr "keine Gruppe"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:428
-#: ../lib/GaletteActivities/Entity/Subscription.php:579
+#: ../lib/GaletteActivities/Entity/Subscription.php:583
 #: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:181
 #: ../tempcache/subscription.html.twig:71
 msgid "Creation date"
 msgstr "Erstelldatum"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:432
-#: ../lib/GaletteActivities/Entity/Subscription.php:591
+#: ../lib/GaletteActivities/Entity/Subscription.php:595
 #: ../tempcache/subscription.html.twig:121
 msgid "Comment"
 msgstr "Kommentar"
@@ -193,30 +193,36 @@ msgstr "Hinzufügen der Buchung gescheitert."
 msgid "Subscription updated"
 msgstr "Aktivität aktualisiert"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:563
+#: ../lib/GaletteActivities/Entity/Subscription.php:328
+#, fuzzy
+#| msgid "Begin date is mandatory"
+msgid "Subscription already exists for this member and activity"
+msgstr "Startdatum ist erforderlich"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:567
 #, fuzzy
 #| msgid "Members as CSV"
 msgid "Member"
 msgstr "Mitglied"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:567
+#: ../lib/GaletteActivities/Entity/Subscription.php:571
 #, fuzzy
 #| msgid "%1$s paid"
 msgid "Is paid"
 msgstr "%1$s bezahlt"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:571
+#: ../lib/GaletteActivities/Entity/Subscription.php:575
 #: ../tempcache/subscriptions.html.twig:102
 #: ../tempcache/subscriptions.html.twig:448
 #: ../tempcache/subscription.html.twig:138
 msgid "Amount"
 msgstr "Betrag"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:575
+#: ../lib/GaletteActivities/Entity/Subscription.php:579
 msgid "Payment method"
 msgstr ""
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:583
+#: ../lib/GaletteActivities/Entity/Subscription.php:587
 #: ../tempcache/subscriptions.html.twig:102
 #: ../tempcache/subscriptions.html.twig:432
 #: ../tempcache/subscription.html.twig:77

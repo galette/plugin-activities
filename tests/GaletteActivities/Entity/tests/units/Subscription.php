@@ -192,7 +192,7 @@ class Subscription extends GaletteTestCase
         $subscription_id = $subscription->getId();
 
         //member is not part of any group
-        $this->assertCount(0,$member_one->getGroups());
+        $this->assertCount(0, $member_one->getGroups());
 
         $this->assertFalse($subscription->isPaid());
         //by default, amount is set to activity price
@@ -247,6 +247,24 @@ class Subscription extends GaletteTestCase
         $member_one->loadGroups();
         $groups = $member_one->getGroups();
         $this->assertCount(1, $groups);
+
+        //no duplicate on subscriptions
+        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb);
+        $data = [
+            'activity' => $gactivity_id,
+            'member' => $member_one->id,
+            'subscription_date' => (new \DateTime())->format('Y-m-d'),
+            'end_date' => (new \DateTime())->modify('+1 year')->format('Y-m-d'),
+            'comment' => 'Comment ' . $this->seed,
+        ];
+        $this->assertTrue($subscription->check($data));
+        $this->assertFalse($subscription->store());
+        $this->assertSame(
+            [
+                'Subscription already exists for this member and activity'
+            ],
+            $subscription->getErrors()
+        );
     }
 
     /**
