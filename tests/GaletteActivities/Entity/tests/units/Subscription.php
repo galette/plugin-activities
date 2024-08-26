@@ -247,19 +247,6 @@ class Subscription extends GaletteTestCase
         $member_one->loadGroups();
         $groups = $member_one->getGroups();
         $this->assertCount(1, $groups);
-
-        //no duplicate on subscriptions
-        $subscription = new \GaletteActivities\Entity\Subscription($this->zdb);
-        $data = [
-            'activity' => $gactivity_id,
-            'member' => $member_one->id,
-            'subscription_date' => (new \DateTime())->format('Y-m-d'),
-            'end_date' => (new \DateTime())->modify('+1 year')->format('Y-m-d'),
-            'comment' => 'Comment ' . $this->seed,
-        ];
-        $this->assertTrue($subscription->check($data));
-        $this->assertTrue($subscription->store());
-
     }
 
     /**

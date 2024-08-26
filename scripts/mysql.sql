@@ -34,6 +34,7 @@ CREATE TABLE galette_activities_subscriptions (
   end_date date NOT NULL,
   comment text,
   PRIMARY KEY (id_subscription),
+  UNIQUE KEY (id_activity, id_adh),
   FOREIGN KEY (id_activity) REFERENCES galette_activities_activities (id_activity) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (id_adh) REFERENCES galette_adherents (id_adh) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
