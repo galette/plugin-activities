@@ -42,6 +42,8 @@ use GaletteActivities\Repository\Subscriptions;
  * @property int $paid_filter
  * @property int $payment_type_filter
  * @property int $date_field
+ * @property array<int> $selected
+ * @property string $query
  */
 class SubscriptionsList extends Pagination
 {
@@ -49,6 +51,7 @@ class SubscriptionsList extends Pagination
 
     public const DATE_END = 0;
     public const DATE_SUBSCRIPTION = 1;
+    public const DATE_CREATION = 2;
     //filters
     private string|int|null $activity_filter;
     private string|int|null $member_filter;
@@ -152,7 +155,6 @@ class SubscriptionsList extends Pagination
                     default:
                         return $this->$name;
                 }
-
             }
         }
 

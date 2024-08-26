@@ -86,7 +86,7 @@ class Activities extends Repository
 
             $activities = [];
             foreach ($results as $row) {
-                $activity = new Activity($this->zdb, $this->login, $row);
+                $activity = new Activity($this->zdb, $row);
                 $activities[] = $activity;
             }
 

@@ -31,19 +31,19 @@
                 {% include "components/forms/text.html.twig" with {
                     id: 'name',
                     value: activity.getName(),
-                    label: _T("Name", "activities"),
+                    label: activity.getFieldLabel('name')
                 } %}
 
                 {% include "components/forms/text.html.twig" with {
                     id: 'type',
                     value: activity.getType(),
-                    label: _T("Type", "activities"),
+                    label: activity.getFieldLabel('type')
                 } %}
 
                 {% include "components/forms/text.html.twig" with {
                     id: 'price',
                     value: activity.getPrice(),
-                    label: _T("Price", "activities"),
+                    label: activity.getFieldLabel('price')
                 } %}
 
                 {% set group_list_values = {(0): _T("Select a group")} %}
@@ -59,7 +59,7 @@
                     id: 'id_group',
                     value: group_id,
                     values: group_list_values,
-                    label: _T("Attach to group", "events"),
+                    label: _T("Attach to group", "activities"),
                     title: _T("Group to attach members that subscribes to activity.", "activities"),
                     raw_labels: true
                 } %}
@@ -67,7 +67,7 @@
                 {% include "components/forms/textarea.html.twig" with {
                     id: 'comment',
                     value: activity.getComment(),
-                    label: _T("Comment", "activities"),
+                    label: activity.getFieldLabel('comment'),
                 } %}
             </div>
         </div>

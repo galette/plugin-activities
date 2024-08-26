@@ -45,7 +45,6 @@ class Subscription
     public const PK = 'id_subscription';
 
     private Db $zdb;
-    private Login $login;
     /** @var array<string> */
     private array $errors;
 
@@ -54,10 +53,10 @@ class Subscription
     private ?Activity $activity = null;
     private int $id_member;
     private ?Adherent $member = null;
-    private bool $paid = false;
+    private bool $paid = true;
     private ?float $payment_amount = null;
     private int $payment_method = PaymentType::OTHER;
-    private ?string $creation_date = null;
+    private ?string $creation_date;
     private ?string $subscription_date = null;
     private ?string $end_date = null;
     private string $comment = '';
@@ -65,16 +64,17 @@ class Subscription
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb   Database instance
-     * @param Login                                   $login Login instance
-     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
-     *                                                       a specific subscription, or null to just
-     *                                                       instanciate object
+     * @param Db                                      $zdb  Database instance
+     * @param null|int|ArrayObject<string,int|string> $args Either a ResultSet row or its id for to load
+     *                                                      a specific subscription, or null to just
+     *                                                      instanciate object
      */
-    public function __construct(Db $zdb, Login $login, int|ArrayObject|null $args = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
-        $this->login = $login;
+        $this->setFields();
+
+        $this->creation_date = date("Y-m-d");
         if (is_int($args)) {
             $this->load($args);
         } elseif (is_object($args)) {
@@ -122,12 +122,12 @@ class Subscription
     private function loadFromRS(ArrayObject $r): void
     {
         $this->id = (int)$r->id_subscription;
-        $this->id_activity = (int)$r->id_activity;
-        $this->activity = new Activity($this->zdb, $this->login, $this->id_activity);
-        $this->id_member = (int)$r->id_adh;
-        $this->member = new Adherent($this->zdb, $this->id_member, false);
+        $this->setActivity((int)$r->{Activity::PK});
+        $this->setMember((int)$r->{Adherent::PK});
         $this->paid = (bool)$r->is_paid;
-        $this->payment_amount = (float)$r->payment_amount;
+        if ($r->payment_amount !== null) {
+            $this->payment_amount = (float)$r->payment_amount;
+        }
         $this->payment_method = (int)$r->payment_method;
         $this->creation_date = $r->creation_date;
         $this->subscription_date = $r->subscription_date;
@@ -179,21 +179,20 @@ class Subscription
      * @param array<string,mixed> $values All values to check, basically the $_POST array
      *                                    after sending the form
      *
-     * @return true|array<string>
+     * @return boolean
      */
-    public function check(array $values): array|bool
+    public function check(array $values): bool
     {
         $this->errors = array();
 
         if (!isset($values['activity']) || empty($values['activity']) || $values['activity'] == -1) {
             $this->errors[] = _T('Activity is mandatory', 'activities');
         } else {
-            $this->id_activity = (int)$values['activity'];
-            $this->getActivity();
+            $this->setActivity((int)$values['activity']);
         }
 
         //financial information
-        if (isset($values['paid'])) {
+        if (isset($values['paid']) && $values['paid']) {
             $this->paid = true;
         } else {
             $this->paid = false;
@@ -201,10 +200,10 @@ class Subscription
 
         if (isset($values['payment_amount']) && !empty($values['payment_amount'])) {
             $this->payment_amount = (float)$values['payment_amount'];
-        }
-
-        if ($this->paid && !$this->payment_amount) {
-            $this->errors[] = _T('Please specify amount if subscription has been paid ;)', 'activities');
+        } else {
+            if ($this->getActivity() && isset($values['save'])) {
+                $this->payment_amount = $this->getActivity()->getPrice();
+            }
         }
 
         if (isset($values['payment_method'])) {
@@ -214,7 +213,7 @@ class Subscription
         if (!isset($values['member']) || empty($values['member'])) {
             $this->errors[] = _T('Member is mandatory', 'activities');
         } else {
-            $this->id_member = (int)$values['member'];
+            $this->setMember((int)$values['member']);
         }
 
         if (isset($values['comment'])) {
@@ -222,13 +221,13 @@ class Subscription
         }
 
         if (!isset($values['subscription_date']) || empty($values['subscription_date'])) {
-            $this->errors[] = _T('Subscription date is mandatory!', 'activities');
+            $this->errors[] = _T('Subscription date is mandatory', 'activities');
         } else {
             $this->setDate('subscription_date', $values['subscription_date']);
         }
 
         if (!isset($values['end_date']) || empty($values['end_date'])) {
-            $this->errors[] = _T('End date is mandatory!', 'activities');
+            $this->errors[] = _T('End date is mandatory', 'activities');
         } else {
             $this->setDate('end_date', $values['end_date']);
         }
@@ -239,14 +238,10 @@ class Subscription
                 print_r($this->errors, true),
                 Analog::ERROR
             );
-            return $this->errors;
-        } else {
-            Analog::log(
-                'Subscription checked successfully.',
-                Analog::DEBUG
-            );
-            return true;
+            return false;
         }
+
+        return true;
     }
 
     /**
@@ -261,20 +256,20 @@ class Subscription
         try {
             $this->zdb->connection->beginTransaction();
             $values = array(
-                Activity::PK        => $this->id_activity,
-                Adherent::PK        => $this->id_member,
-                'is_paid'           => ($this->paid ?:
-                                            ($this->zdb->isPostgres() ? 'false' : 0)),
-                'payment_method'    => $this->payment_method,
-                'payment_amount'    => $this->payment_amount,
+                Activity::PK => $this->id_activity,
+                Adherent::PK => $this->id_member,
+                'is_paid' => ($this->paid ?:
+                    ($this->zdb->isPostgres() ? 'false' : 0)),
+                'payment_method' => $this->payment_method,
+                'payment_amount' => $this->payment_amount,
                 'subscription_date' => $this->subscription_date,
-                'end_date'          => $this->end_date,
-                'comment'           => $this->comment
+                'end_date' => $this->end_date,
+                'comment' => $this->comment
             );
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new subscription
-                $this->creation_date = date("Y-m-d H:i:s");
+                $this->creation_date = date("Y-m-d");
                 $values['creation_date'] = $this->creation_date;
 
                 $insert = $this->zdb->insert($this->getTableName());
@@ -295,6 +290,12 @@ class Subscription
                         _T("Subscription added", "activities"),
                         $this->getActivity()->getName()
                     );
+
+                    //link member to activity group, if any
+                    $group = $this->activity->getGroup();
+                    if ($group !== null) {
+                        $group->addMember($this->member);
+                    }
                 } else {
                     $hist->add(_T("Fail to add new subscription.", "activities"));
                     throw new \Exception(
@@ -322,6 +323,10 @@ class Subscription
 
             $this->zdb->connection->commit();
             return true;
+        } catch (\OverflowException $e) {
+            $this->zdb->connection->rollBack();
+            $this->errors[] = _T('Subscription already exists for this member and activity', 'activities');
+            return false;
         } catch (\Exception $e) {
             $this->zdb->connection->rollBack();
             Analog::log(
@@ -361,9 +366,23 @@ class Subscription
     public function getActivity(): ?Activity
     {
         if (isset($this->id_activity)) {
-            $this->activity = new Activity($this->zdb, $this->login, $this->id_activity);
+            $this->activity = new Activity($this->zdb, $this->id_activity);
         }
         return $this->activity;
+    }
+
+    /**
+     * Get amount from activity
+     *
+     * @return float|null
+     */
+    public function getAmountFromActivity(): ?float
+    {
+        $activity = $this->getActivity();
+        if ($activity !== null) {
+            return $this->getActivity()->getPrice();
+        }
+        return null;
     }
 
     /**
@@ -439,7 +458,7 @@ class Subscription
      */
     public function getCreationDate(bool $formatted = true): string
     {
-        return $this->getDate('creation_date', $formatted);
+        return $this->getDate('creation_date', $formatted) ?? '';
     }
 
     /**
@@ -476,7 +495,7 @@ class Subscription
     public function setActivity(int $activity): self
     {
         $this->id_activity = $activity;
-        $this->activity = new Activity($this->zdb, $this->login, $this->id_activity);
+        $this->activity = new Activity($this->zdb, $this->id_activity);
         return $this;
     }
 
@@ -537,7 +556,7 @@ class Subscription
     {
         $this->fields = array(
             self::PK => array(
-                'label'    => _T('Subscription id', 'activities'), //not a field in the form
+                'label'    => 'Subscription id', //not a field in the form
                 'propname' => 'id'
             ),
             Activity::PK => array(
@@ -573,11 +592,21 @@ class Subscription
                 'propname' => 'end_date'
             ),
             'comment' => array(
-                'label'    => _T('Comment', 'activities'), //not a field in the form
+                'label'    => _T('Comment', 'activities'),
                 'propname' => 'comment'
             )
         );
 
         return $this;
+    }
+
+    /**
+     * Get errors
+     *
+     * @return array<string>
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }

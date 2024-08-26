@@ -188,7 +188,7 @@ class ActivitiesController extends AbstractPluginController
             $activity = $this->session->activity;
             $this->session->activity = null;
         } else {
-            $activity = new Activity($this->zdb, $this->login);
+            $activity = new Activity($this->zdb);
         }
 
         if ($id !== null && $activity->getId() != $id) {
@@ -236,7 +236,7 @@ class ActivitiesController extends AbstractPluginController
     public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
-        $activity = new Activity($this->zdb, $this->login);
+        $activity = new Activity($this->zdb);
         if (isset($post['id']) && !empty($post['id'])) {
             $activity->load((int)$post['id']);
         }
@@ -350,7 +350,7 @@ class ActivitiesController extends AbstractPluginController
      */
     public function confirmRemoveTitle(array $args): string
     {
-        $activity = new Activity($this->zdb, $this->login, (int)$args['id']);
+        $activity = new Activity($this->zdb, (int)$args['id']);
         return sprintf(
             //TRANS %1$s is activity name
             _T('Remove activity %1$s', 'activities'),
@@ -368,7 +368,7 @@ class ActivitiesController extends AbstractPluginController
      */
     protected function doDelete(array $args, array $post): bool
     {
-        $activity = new Activity($this->zdb, $this->login, (int)$args['id']);
+        $activity = new Activity($this->zdb, (int)$args['id']);
         return $activity->remove();
     }
 

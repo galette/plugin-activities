@@ -23,12 +23,12 @@ declare(strict_types=1);
 
 $this->register(
     'Galette Activities',   //Name
-    'Activities management',//Short description
+    'Activities management', //Short description
     'Johan Cwiklinski',     //Author
     '1.0.0',                //Version
     '1.1.4',                //Galette compatible version
     'activities',           //routing name and translation domain
-    '2024-08-13',           //Release date
+    '2024-08-26',           //Release date
     [   //Permissions needed
         '/activities_.*/'           => 'staff'
     ]

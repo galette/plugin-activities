@@ -44,7 +44,6 @@ class Activity
     public const PK = 'id_activity';
 
     private Db $zdb;
-    private Login $login;
     /** @var array<string> */
     private array $errors = [];
 
@@ -60,16 +59,15 @@ class Activity
     /**
      * Default constructor
      *
-     * @param Db                                      $zdb   Database instance
-     * @param Login                                   $login Login instance
-     * @param null|int|ArrayObject<string,int|string> $args  Either a ResultSet row or its id for to load
-     *                                                       a specific activity, or null to just
-     *                                                       instanciate object
+     * @param Db                                      $zdb  Database instance
+     * @param null|int|ArrayObject<string,int|string> $args Either a ResultSet row or its id for to load
+     *                                                      a specific activity, or null to just
+     *                                                      instanciate object
      */
-    public function __construct(Db $zdb, Login $login, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, int|ArrayObject $args = null)
     {
         $this->zdb = $zdb;
-        $this->login = $login;
+        $this->setFields();
 
         if (is_int($args) && $args > 0) {
             $this->load($args);
@@ -223,13 +221,9 @@ class Activity
                 Analog::ERROR
             );
             return false;
-        } else {
-            Analog::log(
-                'Activity checked successfully.',
-                Analog::DEBUG
-            );
-            return true;
         }
+
+        return true;
     }
 
     /**
@@ -252,7 +246,7 @@ class Activity
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new activity
-                $this->creation_date = date("Y-m-d H:i:s");
+                $this->creation_date = date("Y-m-d");
                 $values['creation_date'] = $this->creation_date;
 
                 $insert = $this->zdb->insert($this->getTableName());
@@ -349,7 +343,7 @@ class Activity
      */
     public function getCreationDate(bool $formatted = true): string
     {
-        return $this->getDate('creation_date', $formatted);
+        return $this->getDate('creation_date', $formatted) ?? '';
     }
 
     /**
@@ -411,7 +405,7 @@ class Activity
     {
         $this->fields = array(
             self::PK => array(
-                'label'    => _T('Activity id', 'activities'), //not a field in the form
+                'label'    => 'Activity id', //not a field in the form
                 'propname' => 'id'
             ),
             'name' => array(
@@ -435,7 +429,7 @@ class Activity
                 'propname' => 'creation_date'
             ),
             'comment' => array(
-                'label'    => _T('Comment', 'activities'), //not a field in the form
+                'label'    => _T('Comment', 'activities'),
                 'propname' => 'comment'
             )
         );

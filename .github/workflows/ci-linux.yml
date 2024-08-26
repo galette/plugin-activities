@@ -94,15 +94,6 @@ jobs:
           cd galette-core/galette/plugins/plugin-activities
           ../../vendor/bin/docheader --docheader=../../../.docheader check lib ./*.php
 
-      - name: Install Node
-        uses: actions/setup-node@v4
-
-      - name: Build JS
-        run: |
-          cd galette-core/galette/plugins/plugin-activities
-          npm install
-          npm run-script build
-
   unit-tests:
     runs-on: ubuntu-latest
 

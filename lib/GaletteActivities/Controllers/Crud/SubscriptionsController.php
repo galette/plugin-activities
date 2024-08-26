@@ -112,14 +112,14 @@ class SubscriptionsController extends AbstractPluginController
 
         $activity = null;
         if ($filters->activity_filter) {
-            $activity = new Activity($this->zdb, $this->login, (int)$filters->activity_filter);
+            $activity = new Activity($this->zdb, (int)$filters->activity_filter);
         }
 
         //Groups
         $groups = new Groups($this->zdb, $this->login);
         $groups_list = $groups->getList();
 
-        $subscriptions = new Subscriptions($this->zdb, $this->login, $filters);
+        $subscriptions = new Subscriptions($this->zdb, $filters);
 
         $activities = new Activities($this->zdb, $this->login, $this->preferences);
         $list = $subscriptions->getList();
@@ -258,7 +258,7 @@ class SubscriptionsController extends AbstractPluginController
             $subscription = $this->session->subscription;
             $this->session->subscription = null;
         } else {
-            $subscription = new Subscription($this->zdb, $this->login);
+            $subscription = new Subscription($this->zdb);
         }
 
         if ($id !== null && $subscription->getId() != $id) {
@@ -309,7 +309,7 @@ class SubscriptionsController extends AbstractPluginController
                     'autocomplete'      => true,
                     'page_title'        => $title,
                     'subscription'      => $subscription,
-                    'activities'        => $activities->getList(true),
+                    'activities'        => $activities->getList(),
                     'require_dialog'    => true,
                     'require_calendar'  => true,
                     // pseudo random int
@@ -333,7 +333,7 @@ class SubscriptionsController extends AbstractPluginController
     public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
-        $subscription = new Subscription($this->zdb, $this->login);
+        $subscription = new Subscription($this->zdb);
         if (isset($post['id']) && !empty($post['id'])) {
             $subscription->load((int)$post['id']);
         }
@@ -355,7 +355,7 @@ class SubscriptionsController extends AbstractPluginController
         // Validation
         $valid = $subscription->check($post);
         if ($valid !== true) {
-            $error_detected = array_merge($error_detected, $valid);
+            $error_detected = array_merge($error_detected, $subscription->getErrors());
         }
 
         if (count($error_detected) == 0 && isset($post['save'])) {
@@ -375,9 +375,12 @@ class SubscriptionsController extends AbstractPluginController
                 }
             } elseif ($store === false) {
                 //something went wrong :'(
-                $error_detected[] = _T("An error occurred while storing the subscription.", "activities");
-            } else {
-                $error_detected[] = $store;
+                $errors = $subscription->getErrors();
+                if (count($errors)) {
+                    $error_detected = array_merge($error_detected, $errors);
+                } else {
+                    $error_detected[] = _T("An error occurred while storing the subscription.", "activities");
+                }
             }
         }
 
@@ -483,7 +486,7 @@ class SubscriptionsController extends AbstractPluginController
      */
     public function confirmRemoveTitle(array $args): string
     {
-        $subscription = new Subscription($this->zdb, $this->login, (int)$args['id']);
+        $subscription = new Subscription($this->zdb, (int)$args['id']);
         $member = $subscription->getMember();
         $activity = $subscription->getActivity();
         return sprintf(
@@ -504,7 +507,7 @@ class SubscriptionsController extends AbstractPluginController
      */
     protected function doDelete(array $args, array $post): bool
     {
-        $subscription = new Subscription($this->zdb, $this->login, (int)$post['id']);
+        $subscription = new Subscription($this->zdb, (int)$post['id']);
         return $subscription->remove();
     }
 

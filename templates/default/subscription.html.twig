@@ -29,6 +29,13 @@
             </div>
             <div class="active content">
                 {% include "components/forms/date.html.twig" with {
+                    id: 'creation_date',
+                    value: subscription.getCreationDate(),
+                    label: _T("Creation date", "activities"),
+                    required: true
+                } %}
+
+                {% include "components/forms/date.html.twig" with {
                     id: 'subscription_date',
                     value: subscription.getSubscriptionDate(),
                     label: _T("Subscription date", "activities"),
@@ -41,7 +48,6 @@
                     label: _T("End date", "activities"),
                     required: true
                 } %}
-
 
                 {% set activities_list_values = {(-1): _T("Select an activity", "activities")} %}
                 {% for activity in activities %}
@@ -72,7 +78,6 @@
             </div>
         </div>
 
-    {% if login.isAdmin() or login.isStaff() %}
         <div class="ui styled fluid accordion field">
             <div class="active title">
                 <i class="icon dropdown"></i>
@@ -83,6 +88,7 @@
                     id: 'payment_amount',
                     value: subscription.getAmount(),
                     label: _T("Amount", "activities"),
+                    placeholder: subscription.getAmountFromActivity()
                 } %}
 
                 <div class="three fields">
@@ -95,13 +101,12 @@
                 {% include "components/forms/checkbox.html.twig" with {
                     id: 'paid',
                     value: subscription.isPaid(),
-                    label: _T("Paid", "events"),
+                    label: _T("Paid", "activities"),
                     checked: subscription.isPaid()
                 } %}
                 </div>
             </div>
         </div>
-    {% endif %}
         <div class="ui basic center aligned fitted segment">
             <button type="submit" name="save" class="action ui labeled icon primary button">
                 <i class="save icon"></i> {{ _T("Save") }}
@@ -110,4 +115,15 @@
             {% include "components/forms/csrf.html.twig" %}
         </div>
     </form>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $('#activity').on('change', function() {
+            var _this = $(this);
+            var _val = _this.find('option:selected').val()
+            _this.parents('form').find('input[name=save]').remove();
+            _this.parents('form').submit();
+        });
+    </script>
 {% endblock %}

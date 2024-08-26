@@ -31,10 +31,7 @@
 
 {% block infoline %}
     {% set infoline = {
-        'label': _Tn("%1$s activity", "%1$s activities", nb, "activities")|replace({"%1$s": nb}),
-        'route': {
-            'name': 'filter-activitieslist'
-        }
+        'label': _Tn("%1$s activity", "%1$s activities", nb, "activities")|replace({"%1$s": nb})
     } %}
     {{ parent() }}
 {% endblock %}
@@ -107,6 +104,6 @@
             </td>
         </tr>
     {% else %}
-        <tr><td colspan="6" class="emptylist">{{ _T("No activity has been found", "activities") }}</td></tr>
+        <tr><td colspan="7" class="emptylist">{{ _T("No activity has been found", "activities") }}</td></tr>
     {% endfor %}
 {% endblock %}

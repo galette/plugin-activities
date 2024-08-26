@@ -56,6 +56,7 @@
         {'label': _T("Member"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_MEMBER')},
         {'label': _T("Subscription date", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_SUBSCRIPTIONDATE')},
         {'label': _T("End date", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_ENDDATE')},
+        {'label': _T("Amount", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_AMOUNT')},
         {'label': _T("Paid", "activities"), order: constant('GaletteActivities\\Repository\\Subscriptions::ORDERBY_PAID')}
     ] %}
     {{ parent() }}
@@ -98,6 +99,7 @@
             <div class="field">
                 <label for="date_field">{{ _T("Date type", "activities") }}</label>
                 <select name="date_field" id="date_field" class="ui search dropdown">
+                    <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_CREATION") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_CREATION') %} selected="selected"{% endif %}>{{ _T("Creation", "activities") }}</option>
                     <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_END") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_END') %} selected="selected"{% endif %}>{{ _T("End") }}</option>
                     <option value="{{ constant("GaletteActivities\\Filters\\SubscriptionsList::DATE_SUBSCRIPTION") }}"{% if filters.date_field == constant('GaletteActivities\\Filters\\SubscriptionsList::DATE_SUBSCRIPTION') %} selected="selected"{% endif %}>{{ _T("Subscription", "activities") }}</option>
                 </select>
@@ -197,6 +199,7 @@
                     </td>
                     <td class="{{ rclass }}" data-col-label="{{ _T("Subscription date", "activities") }}">{{ subscription.getSubscriptionDate() }}</td>
                     <td class="{{ rclass }}" data-col-label="{{ _T("End date", "activities") }}">{{ subscription.getEndDate() }}</td>
+                    <td class="{{ rclass }}" data-col-label="{{ _T("Amount", "activities") }}">{{ subscription.getAmount() }}</td>
                     <td class="{{ rclass }} center" data-col-label="{% if subscription.isPaid() %}{{ _T("Paid", "activities") }}{% else %}{{ _T("Not paid", "activities") }}{% endif %}">
                         <i class="money bill wave{% if not subscription.isPaid() %} red{% endif %} icon tooltip" data-html="{% if subscription.isPaid() %}{{ _T("Paid", "activities") }}{% else %}{{ _T("Not paid", "activities") }}{% endif %}"></i>
                         <span class="visually-hidden">

@@ -1,0 +1,369 @@
+# Johan Cwiklinski <trasher@x-tnd.be>, 2020, 2021, 2022.
+# Tymofij Lytvynenko <till.svit@gmail.com>, 2021.
+# Artem <artem@molotov.work>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-26 07:53+0200\n"
+"PO-Revision-Date: 2024-08-26 07:54+0200\n"
+"Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/galette/events-"
+"plugin/uk/>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Poedit 3.4.4\n"
+
+#: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:127
+msgid "Activities management"
+msgstr "Управління діяльностями"
+
+#: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:199
+#: ../lib/GaletteActivities/Entity/Subscription.php:563
+#: ../tempcache/subscriptions.html.twig:102
+#: ../tempcache/subscriptions.html.twig:124
+#: ../tempcache/subscription.html.twig:109
+msgid "Activity"
+msgstr "Діяльність"
+
+#: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:265
+msgid "New activity has been successfully added."
+msgstr "Нову діяльність успішно додано."
+
+#: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:267
+msgid "Activity has been modified."
+msgstr "Діяльність змінено."
+
+#: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:271
+msgid "An error occurred while storing the activity."
+msgstr "Під час зберігання діяльності сталася помилка."
+
+#. TRANS %1$s is activity name
+#: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:356
+#, php-format
+msgid "Remove activity %1$s"
+msgstr "Вилучити діяльність %1$s"
+
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:146
+#, fuzzy
+#| msgid "Activities management"
+msgid "Subscriptions management"
+msgstr "Управління діяльностями"
+
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:269
+#: ../tempcache/subscriptions.html.twig:205
+msgid "Subscription"
+msgstr ""
+
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:372
+#, fuzzy
+#| msgid "New booking has been successfully added."
+msgid "New subscription has been successfully added."
+msgstr "Нове бронювання успішно додано."
+
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:374
+#, fuzzy
+#| msgid "Activity has been modified."
+msgid "Subscription has been modified."
+msgstr "Діяльність змінено."
+
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:382
+#, fuzzy
+#| msgid "An error occurred while storing the booking."
+msgid "An error occurred while storing the subscription."
+msgstr "Під час зберігання бронювання сталася помилка."
+
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:391
+#, fuzzy
+#| msgid "Do not forget to store the booking"
+msgid "Do not forget to store the subscription"
+msgstr "Не забудьте зберегти бронювання"
+
+#. TRANS: %1$s is the member name, %2$s the activity name.
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:494
+#, fuzzy, php-format
+#| msgid "Remove booking for %1$s on %2$s"
+msgid "Remove subscription for %1$s on %2$s"
+msgstr "Вилучити бронювання для %1$s на %2$s"
+
+#: ../lib/GaletteActivities/PluginGaletteActivities.php:51
+#: ../lib/GaletteActivities/PluginGaletteActivities.php:55
+msgid "Activities"
+msgstr "Діяльності"
+
+#: ../lib/GaletteActivities/PluginGaletteActivities.php:62
+msgid "Subscriptions"
+msgstr ""
+
+#: ../lib/GaletteActivities/Entity/Activity.php:182
+msgid "Name is mandatory"
+msgstr "Назва є обов’язковою"
+
+#: ../lib/GaletteActivities/Entity/Activity.php:189
+msgid "Type is too long"
+msgstr ""
+
+#: ../lib/GaletteActivities/Entity/Activity.php:267
+msgid "Activity added"
+msgstr "Діяльність додано"
+
+#: ../lib/GaletteActivities/Entity/Activity.php:272
+msgid "Fail to add new activity."
+msgstr "Не вдалося додати нову діяльність."
+
+#: ../lib/GaletteActivities/Entity/Activity.php:291
+msgid "Activity updated"
+msgstr "Діяльність оновлено"
+
+#: ../lib/GaletteActivities/Entity/Activity.php:412
+#: ../tempcache/activities.html.twig:100
+msgid "Name"
+msgstr "Ім'я"
+
+#: ../lib/GaletteActivities/Entity/Activity.php:416
+#: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:167
+msgid "Type"
+msgstr ""
+
+#: ../lib/GaletteActivities/Entity/Activity.php:420
+#: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:173
+msgid "Price"
+msgstr ""
+
+#: ../lib/GaletteActivities/Entity/Activity.php:424
+#: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:187
+msgid "Group"
+msgstr "Група"
+
+#: ../lib/GaletteActivities/Entity/Activity.php:428
+#: ../lib/GaletteActivities/Entity/Subscription.php:583
+#: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:181
+#: ../tempcache/subscription.html.twig:71
+msgid "Creation date"
+msgstr "Дата створення"
+
+#: ../lib/GaletteActivities/Entity/Activity.php:432
+#: ../lib/GaletteActivities/Entity/Subscription.php:595
+#: ../tempcache/subscription.html.twig:121
+msgid "Comment"
+msgstr "Коментар"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:189
+#, fuzzy
+#| msgid "Event is mandatory"
+msgid "Activity is mandatory"
+msgstr "Подія є обов'язковою"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:214
+msgid "Member is mandatory"
+msgstr "Член є обов'язковим"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:224
+#, fuzzy
+#| msgid "Begin date is mandatory"
+msgid "Subscription date is mandatory"
+msgstr "Дата початку є обов’язковою"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:230
+#, fuzzy
+#| msgid "Begin date is mandatory"
+msgid "End date is mandatory"
+msgstr "Дата початку є обов’язковою"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:290
+msgid "Subscription added"
+msgstr ""
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:300
+#, fuzzy
+#| msgid "Fail to add new booking."
+msgid "Fail to add new subscription."
+msgstr "Не вдалося додати нове бронювання."
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:319
+#, fuzzy
+#| msgid "Activity updated"
+msgid "Subscription updated"
+msgstr "Діяльність оновлено"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:328
+#, fuzzy
+#| msgid "Begin date is mandatory"
+msgid "Subscription already exists for this member and activity"
+msgstr "Дата початку є обов’язковою"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:567
+#, fuzzy
+#| msgid "Members as CSV"
+msgid "Member"
+msgstr "Члени як CSV"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:571
+#, fuzzy
+#| msgid "%1$s paid"
+msgid "Is paid"
+msgstr "%1$s оплачено"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:575
+#: ../tempcache/subscriptions.html.twig:102
+#: ../tempcache/subscriptions.html.twig:448
+#: ../tempcache/subscription.html.twig:138
+msgid "Amount"
+msgstr "Сума"
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:579
+msgid "Payment method"
+msgstr ""
+
+#: ../lib/GaletteActivities/Entity/Subscription.php:587
+#: ../tempcache/subscriptions.html.twig:102
+#: ../tempcache/subscriptions.html.twig:432
+#: ../tempcache/subscription.html.twig:77
+#, fuzzy
+#| msgid "Creation date"
+msgid "Subscription date"
+msgstr "Дата створення"
+
+#: ../tempcache/activities.html.twig:62
+#, php-format
+msgid "%1$s activity"
+msgid_plural "%1$s activities"
+msgstr[0] "%1$s діяльність"
+msgstr[1] "%1$s діяльности"
+msgstr[2] "%1$s діяльностей"
+
+#: ../tempcache/activities.html.twig:87
+msgid "New activity"
+msgstr "Нова діяльність"
+
+#: ../tempcache/activities.html.twig:196
+#, php-format
+msgid "%1$s: edit information"
+msgstr "%1$s: редагування відомостей"
+
+#: ../tempcache/activities.html.twig:198
+#, php-format
+msgid "%1$s: remove from database"
+msgstr "%1$s: вилучення з бази даних"
+
+#: ../tempcache/activities.html.twig:234
+msgid "No activity has been found"
+msgstr "Жодної діяльності не знайдено"
+
+#: ../tempcache/subscriptions.html.twig:64
+#, php-format
+msgid "%1$s subscription"
+msgid_plural "%1$s subscriptions"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../tempcache/subscriptions.html.twig:89
+msgid "New subscription"
+msgstr ""
+
+#: ../tempcache/subscriptions.html.twig:102
+#: ../tempcache/subscriptions.html.twig:440
+#: ../tempcache/subscription.html.twig:83
+msgid "End date"
+msgstr "Дата завершення"
+
+#: ../tempcache/subscriptions.html.twig:102
+#: ../tempcache/subscriptions.html.twig:281
+#: ../tempcache/subscriptions.html.twig:457
+#: ../tempcache/subscriptions.html.twig:469
+#: ../tempcache/subscriptions.html.twig:480
+#: ../tempcache/subscription.html.twig:152
+msgid "Paid"
+msgstr "Оплачено"
+
+#: ../tempcache/subscriptions.html.twig:129
+#, fuzzy
+#| msgid "activities"
+msgid "All activities"
+msgstr "діяльності"
+
+#: ../tempcache/subscriptions.html.twig:158
+msgid "Search or pick a member"
+msgstr ""
+
+#: ../tempcache/subscriptions.html.twig:166
+msgid "All payment types"
+msgstr "Усі типи платежів"
+
+#: ../tempcache/subscriptions.html.twig:174
+#, fuzzy
+#| msgid "Date"
+msgid "Date type"
+msgstr "Дата"
+
+#: ../tempcache/subscriptions.html.twig:185
+#, fuzzy
+#| msgid "Creation date"
+msgid "Creation"
+msgstr "Дата створення"
+
+#: ../tempcache/subscriptions.html.twig:251
+msgid "Paid subscription:"
+msgstr ""
+
+#: ../tempcache/subscriptions.html.twig:297
+#: ../tempcache/subscriptions.html.twig:459
+#: ../tempcache/subscriptions.html.twig:471
+#: ../tempcache/subscriptions.html.twig:486
+msgid "Not paid"
+msgstr "Не оплачується"
+
+#: ../tempcache/subscriptions.html.twig:349
+#, fuzzy, php-format
+#| msgid "Found bookings total %f"
+msgid "Found subscriptions total %f"
+msgstr "Загалом бронювань знайдено: %f"
+
+#: ../tempcache/subscriptions.html.twig:505
+msgid "Edit subscription"
+msgstr ""
+
+#: ../tempcache/subscriptions.html.twig:517
+msgid "Remove from database"
+msgstr "Вилучити з бази даних"
+
+#: ../tempcache/subscriptions.html.twig:547
+#, fuzzy
+#| msgid "No booking has been found"
+msgid "No subscription has been found"
+msgstr "Бронювання не знайдено"
+
+#: ../tempcache/activity.html.twig:64
+msgid "General information"
+msgstr "Загальні відомості"
+
+#: ../tempcache/activity.html.twig:124
+#, fuzzy
+#| msgid "Limit to group"
+msgid "Attach to group"
+msgstr "Обмежити групою"
+
+#: ../tempcache/activity.html.twig:124
+msgid "Group to attach members that subscribes to activity."
+msgstr ""
+
+#: ../tempcache/subscription.html.twig:64
+#, fuzzy
+#| msgid "%1$s: edit information"
+msgid "Subscription information"
+msgstr "%1$s: редагування відомостей"
+
+#: ../tempcache/subscription.html.twig:88
+#, fuzzy
+#| msgid "Select an event"
+msgid "Select an activity"
+msgstr "Виберіть подію"
+
+#: ../tempcache/subscription.html.twig:131
+msgid "Financial information"
+msgstr "Фінансові відомості"

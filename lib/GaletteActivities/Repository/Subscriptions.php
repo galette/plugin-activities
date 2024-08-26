@@ -25,13 +25,8 @@ namespace GaletteActivities\Repository;
 
 use Analog\Analog;
 use Laminas\Db\Sql\Expression;
-use Laminas\Db\Sql\Predicate;
-use Laminas\Db\Sql\Predicate\PredicateSet;
-use Galette\Core\Login;
 use Galette\Core\Db;
 use Galette\Entity\Adherent;
-use Galette\Entity\Group;
-use Galette\Repository\Groups;
 use GaletteActivities\Entity\Activity;
 use GaletteActivities\Entity\Subscription;
 use GaletteActivities\Filters\SubscriptionsList;
@@ -45,7 +40,6 @@ use Laminas\Db\Sql\Select;
 class Subscriptions
 {
     private Db $zdb;
-    private Login $login;
     private SubscriptionsList $filters;
     private int $count;
     private float $sum;
@@ -55,6 +49,7 @@ class Subscriptions
     public const ORDERBY_SUBSCRIPTIONDATE = 2;
     public const ORDERBY_ENDDATE = 3;
     public const ORDERBY_PAID = 3;
+    public const ORDERBY_AMOUNT = 4;
 
     public const FILTER_DC_PAID = 0;
     public const FILTER_PAID = 1;
@@ -64,13 +59,11 @@ class Subscriptions
      * Constructor
      *
      * @param Db                 $zdb     Database instance
-     * @param Login              $login   Login instance
      * @param ?SubscriptionsList $filters Filtering
      */
-    public function __construct(Db $zdb, Login $login, SubscriptionsList $filters = null)
+    public function __construct(Db $zdb, SubscriptionsList $filters = null)
     {
         $this->zdb = $zdb;
-        $this->login = $login;
 
         if ($filters === null) {
             $this->filters = new SubscriptionsList();
@@ -102,7 +95,7 @@ class Subscriptions
 
             $subscriptions = [];
             foreach ($results as $row) {
-                $subscription = new Subscription($this->zdb, $this->login, $row);
+                $subscription = new Subscription($this->zdb, $row);
                 $subscriptions[] = $subscription;
             }
 
@@ -255,6 +248,9 @@ class Subscriptions
             }
 
             switch ($this->filters->date_field) {
+                case SubscriptionsList::DATE_CREATION:
+                    $field = 's.creation_date';
+                    break;
                 case SubscriptionsList::DATE_SUBSCRIPTION:
                     $field = 'subscription_date';
                     break;
@@ -355,6 +351,11 @@ class Subscriptions
             case self::ORDERBY_PAID:
                 if ($this->canOrderBy('id_paid', $fields)) {
                     $order[] = 'is_paid ' . $this->filters->getDirection();
+                }
+                break;
+            case self::ORDERBY_AMOUNT:
+                if ($this->canOrderBy('payment_amount', $fields)) {
+                    $order[] = 'payment_amount ' . $this->filters->getDirection();
                 }
                 break;
         }
