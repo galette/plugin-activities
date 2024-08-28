@@ -249,3 +249,9 @@
                 <tr><td colspan="9" class="emptylist">{{ _T("No subscription has been found", "activities") }}</td></tr>
     {% endfor %}
 {% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        {% include "elements/js/choose_adh.js.twig" with {"js_chosen_id": "#member_filter"} %}
+    </script>
+{% endblock %}
