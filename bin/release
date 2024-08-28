@@ -378,13 +378,8 @@ def add_libs(rel_name, galette_archive):
     p1 = subprocess.Popen(wp_cmd, shell=True, cwd=npm_dir)
     p1.wait()
 
-    shutil.rmtree(os.path.join(npm_dir, 'node_modules'))
     shutil.rmtree(os.path.join(npm_dir, 'bin'))
     os.remove(os.path.join(npm_dir, '.gitignore'))
-    os.remove(os.path.join(npm_dir, 'webpack.config.js'))
-    os.remove(os.path.join(npm_dir, 'package.json'))
-    os.remove(os.path.join(npm_dir, 'package-lock.json'))
-    os.remove(os.path.join(npm_dir, 'calendar.js'))
 
     composer_dir = os.path.join(src_dir, rel_name)
     has_composer = os.path.exists(
