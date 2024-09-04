@@ -83,8 +83,6 @@ class Subscriptions
     {
         try {
             $select = $this->buildSelect(null);
-            $select->order($this->buildOrderClause());
-
             $this->proceedCount($select);
 
             if ($full !== true) {
@@ -333,8 +331,8 @@ class Subscriptions
                 break;
             case self::ORDERBY_MEMBER:
                 if ($this->canOrderBy(Adherent::PK, $fields)) {
-                    $order[] = 'a.nom_adh ' . $this->filters->getDirection() .
-                                ', a.prenom_adh ' . $this->filters->getDirection();
+                    $order[] = 'a.nom_adh ' . $this->filters->getDirection();
+                    $order[] = 'a.prenom_adh ' . $this->filters->getDirection();
                 }
                 break;
             case self::ORDERBY_SUBSCRIPTIONDATE:
