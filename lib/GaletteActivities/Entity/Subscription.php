@@ -206,6 +206,10 @@ class Subscription
             }
         }
 
+        if (isset($values['creation_date']) && !empty($values['creation_date'])) {
+            $this->setDate('creation_date', $values['creation_date']);
+        }
+
         if (isset($values['payment_method'])) {
             $this->payment_method = (int)$values['payment_method'];
         }
@@ -262,6 +266,7 @@ class Subscription
                     ($this->zdb->isPostgres() ? 'false' : 0)),
                 'payment_method' => $this->payment_method,
                 'payment_amount' => $this->payment_amount,
+                'creation_date' => $this->creation_date,
                 'subscription_date' => $this->subscription_date,
                 'end_date' => $this->end_date,
                 'comment' => $this->comment
@@ -269,9 +274,6 @@ class Subscription
 
             if (!isset($this->id) || $this->id == '') {
                 //we're inserting a new subscription
-                $this->creation_date = date("Y-m-d");
-                $values['creation_date'] = $this->creation_date;
-
                 $insert = $this->zdb->insert($this->getTableName());
                 $insert->values($values);
                 $add = $this->zdb->execute($insert);
