@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Galette Activities plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 07:53+0200\n"
-"PO-Revision-Date: 2024-08-26 07:54+0200\n"
+"POT-Creation-Date: 2024-09-10 22:29+0200\n"
+"PO-Revision-Date: 2024-09-10 22:35+0200\n"
 "Last-Translator: Johan Cwiklinski <johan@x-tnd.be>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/galette/events-"
 "plugin/fr/>\n"
@@ -14,16 +14,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:127
 msgid "Activities management"
 msgstr "Gestion des activités"
 
 #: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:199
-#: ../lib/GaletteActivities/Entity/Subscription.php:563
-#: ../tempcache/subscriptions.html.twig:102
-#: ../tempcache/subscriptions.html.twig:124
+#: ../lib/GaletteActivities/Entity/Subscription.php:565
+#: ../tempcache/subscriptions.html.twig:103
+#: ../tempcache/subscriptions.html.twig:125
 #: ../tempcache/subscription.html.twig:109
 msgid "Activity"
 msgstr "Activité"
@@ -50,29 +50,29 @@ msgstr "Supprimer l'activité %1$s"
 msgid "Subscriptions management"
 msgstr "Gestion des souscriptions"
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:269
-#: ../tempcache/subscriptions.html.twig:205
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:271
+#: ../tempcache/subscriptions.html.twig:206
 msgid "Subscription"
 msgstr "Souscription"
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:372
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:374
 msgid "New subscription has been successfully added."
 msgstr "La nouvelle souscription a été ajoutée avec succès."
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:374
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:376
 msgid "Subscription has been modified."
 msgstr "La souscription a été modifiée."
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:382
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:384
 msgid "An error occurred while storing the subscription."
 msgstr "Une erreur est survenue à l'enregistrement de la souscription."
 
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:391
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:393
 msgid "Do not forget to store the subscription"
 msgstr "N'oubliez pas d'enregistrer la souscription"
 
 #. TRANS: %1$s is the member name, %2$s the activity name.
-#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:494
+#: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:496
 #, php-format
 msgid "Remove subscription for %1$s on %2$s"
 msgstr "Supprimer la souscription pour %1$s sur %2$s"
@@ -85,6 +85,11 @@ msgstr "Activités"
 #: ../lib/GaletteActivities/PluginGaletteActivities.php:62
 msgid "Subscriptions"
 msgstr "Souscriptions"
+
+#. TRANS %membername will be replaced with current member name
+#: ../lib/GaletteActivities/PluginGaletteActivities.php:117
+msgid "New subscription for %membername"
+msgstr "Nouvelle souscription pour %membername"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:182
 msgid "Name is mandatory"
@@ -127,14 +132,14 @@ msgid "Group"
 msgstr "Groupe"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:428
-#: ../lib/GaletteActivities/Entity/Subscription.php:583
+#: ../lib/GaletteActivities/Entity/Subscription.php:585
 #: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:181
 #: ../tempcache/subscription.html.twig:71
 msgid "Creation date"
 msgstr "Date de création"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:432
-#: ../lib/GaletteActivities/Entity/Subscription.php:595
+#: ../lib/GaletteActivities/Entity/Subscription.php:597
 #: ../tempcache/subscription.html.twig:121
 msgid "Comment"
 msgstr "Commentaire"
@@ -143,56 +148,56 @@ msgstr "Commentaire"
 msgid "Activity is mandatory"
 msgstr "L'activité est requise"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:214
+#: ../lib/GaletteActivities/Entity/Subscription.php:218
 msgid "Member is mandatory"
 msgstr "L'adhérent est requis"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:224
+#: ../lib/GaletteActivities/Entity/Subscription.php:228
 msgid "Subscription date is mandatory"
 msgstr "La date de souscription est requise"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:230
+#: ../lib/GaletteActivities/Entity/Subscription.php:234
 msgid "End date is mandatory"
 msgstr "La date de fin est requise"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:290
+#: ../lib/GaletteActivities/Entity/Subscription.php:292
 msgid "Subscription added"
 msgstr "Souscription ajoutée"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:300
+#: ../lib/GaletteActivities/Entity/Subscription.php:302
 msgid "Fail to add new subscription."
 msgstr "Erreur à l'ajout de la nouvelle souscription."
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:319
+#: ../lib/GaletteActivities/Entity/Subscription.php:321
 msgid "Subscription updated"
 msgstr "Souscription mise à jour"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:328
+#: ../lib/GaletteActivities/Entity/Subscription.php:330
 msgid "Subscription already exists for this member and activity"
 msgstr "Une souscription existe déjà pour cet adhérent et cette activité"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:567
+#: ../lib/GaletteActivities/Entity/Subscription.php:569
 msgid "Member"
 msgstr "Adhérent"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:571
+#: ../lib/GaletteActivities/Entity/Subscription.php:573
 msgid "Is paid"
 msgstr "Est payée"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:575
-#: ../tempcache/subscriptions.html.twig:102
-#: ../tempcache/subscriptions.html.twig:448
+#: ../lib/GaletteActivities/Entity/Subscription.php:577
+#: ../tempcache/subscriptions.html.twig:103
+#: ../tempcache/subscriptions.html.twig:449
 #: ../tempcache/subscription.html.twig:138
 msgid "Amount"
 msgstr "Montant"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:579
+#: ../lib/GaletteActivities/Entity/Subscription.php:581
 msgid "Payment method"
 msgstr "Méthode de paiement"
 
-#: ../lib/GaletteActivities/Entity/Subscription.php:587
-#: ../tempcache/subscriptions.html.twig:102
-#: ../tempcache/subscriptions.html.twig:432
+#: ../lib/GaletteActivities/Entity/Subscription.php:589
+#: ../tempcache/subscriptions.html.twig:103
+#: ../tempcache/subscriptions.html.twig:433
 #: ../tempcache/subscription.html.twig:77
 msgid "Subscription date"
 msgstr "Date de souscription"
@@ -222,77 +227,77 @@ msgstr "%1$s : supprimer de la base de données"
 msgid "No activity has been found"
 msgstr "Aucune activité trouvée"
 
-#: ../tempcache/subscriptions.html.twig:64
+#: ../tempcache/subscriptions.html.twig:65
 #, php-format
 msgid "%1$s subscription"
 msgid_plural "%1$s subscriptions"
 msgstr[0] "%1$s souscription"
 msgstr[1] "%1$s souscriptions"
 
-#: ../tempcache/subscriptions.html.twig:89
+#: ../tempcache/subscriptions.html.twig:90
 msgid "New subscription"
 msgstr "Nouvelle souscription"
 
-#: ../tempcache/subscriptions.html.twig:102
-#: ../tempcache/subscriptions.html.twig:440
+#: ../tempcache/subscriptions.html.twig:103
+#: ../tempcache/subscriptions.html.twig:441
 #: ../tempcache/subscription.html.twig:83
 msgid "End date"
 msgstr "Date de fin"
 
-#: ../tempcache/subscriptions.html.twig:102
-#: ../tempcache/subscriptions.html.twig:281
-#: ../tempcache/subscriptions.html.twig:457
-#: ../tempcache/subscriptions.html.twig:469
-#: ../tempcache/subscriptions.html.twig:480
-#: ../tempcache/subscription.html.twig:152
+#: ../tempcache/subscriptions.html.twig:103
+#: ../tempcache/subscriptions.html.twig:282
+#: ../tempcache/subscriptions.html.twig:458
+#: ../tempcache/subscriptions.html.twig:470
+#: ../tempcache/subscriptions.html.twig:481
+#: ../tempcache/subscription.html.twig:151
 msgid "Paid"
 msgstr "Payée"
 
-#: ../tempcache/subscriptions.html.twig:129
+#: ../tempcache/subscriptions.html.twig:130
 msgid "All activities"
 msgstr "Toutes les activités"
 
-#: ../tempcache/subscriptions.html.twig:158
+#: ../tempcache/subscriptions.html.twig:159
 msgid "Search or pick a member"
 msgstr "Chercher ou choisir un adhérent"
 
-#: ../tempcache/subscriptions.html.twig:166
+#: ../tempcache/subscriptions.html.twig:167
 msgid "All payment types"
 msgstr "Toutes les méthodes de paiement"
 
-#: ../tempcache/subscriptions.html.twig:174
+#: ../tempcache/subscriptions.html.twig:175
 msgid "Date type"
 msgstr "Type de date"
 
-#: ../tempcache/subscriptions.html.twig:185
+#: ../tempcache/subscriptions.html.twig:186
 msgid "Creation"
 msgstr "Création"
 
-#: ../tempcache/subscriptions.html.twig:251
+#: ../tempcache/subscriptions.html.twig:252
 msgid "Paid subscription:"
 msgstr "Souscription payée :"
 
-#: ../tempcache/subscriptions.html.twig:297
-#: ../tempcache/subscriptions.html.twig:459
-#: ../tempcache/subscriptions.html.twig:471
-#: ../tempcache/subscriptions.html.twig:486
+#: ../tempcache/subscriptions.html.twig:298
+#: ../tempcache/subscriptions.html.twig:460
+#: ../tempcache/subscriptions.html.twig:472
+#: ../tempcache/subscriptions.html.twig:487
 msgid "Not paid"
 msgstr "Non payée"
 
-#: ../tempcache/subscriptions.html.twig:349
+#: ../tempcache/subscriptions.html.twig:350
 #, php-format
 msgid "Found subscriptions total %f"
 msgstr "Total des souscriptions trouvées : %f"
 
-#: ../tempcache/subscriptions.html.twig:505
+#: ../tempcache/subscriptions.html.twig:506
 msgid "Edit subscription"
 msgstr "Modifier la souscription"
 
-#: ../tempcache/subscriptions.html.twig:517
+#: ../tempcache/subscriptions.html.twig:518
 msgid "Remove from database"
 msgstr "Supprimer de la base de données"
 
-#: ../tempcache/subscriptions.html.twig:547
+#: ../tempcache/subscriptions.html.twig:548
 msgid "No subscription has been found"
 msgstr "Aucune souscription trouvée"
 
