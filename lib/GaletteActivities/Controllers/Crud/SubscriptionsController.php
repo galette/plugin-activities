@@ -263,6 +263,8 @@ class SubscriptionsController extends AbstractPluginController
 
         if ($id !== null && $subscription->getId() != $id) {
             $subscription->load($id);
+        } elseif ($id_adh !== null) {
+            $subscription->setMember($id_adh);
         }
 
         // template variable declaration
