@@ -14,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-09-10 22:29+0200\n"
 "PO-Revision-Date: 2024-10-15 12:16+0000\n"
-"Last-Translator: Kamborio <Kamborio15@users.noreply.hosted.weblate.org>\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/galette/"
 "plugins-activities/es/>\n"
 "Language: es\n"
@@ -290,7 +290,7 @@ msgstr "Fecha de finalización"
 #: ../tempcache/subscriptions.html.twig:481
 #: ../tempcache/subscription.html.twig:151
 msgid "Paid"
-msgstr "Remunerado"
+msgstr "Pagado"
 
 #: ../tempcache/subscriptions.html.twig:130
 #, fuzzy
