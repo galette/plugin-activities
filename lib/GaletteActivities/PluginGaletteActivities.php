@@ -101,7 +101,28 @@ class PluginGaletteActivities extends GalettePlugin
      */
     public static function getListActionsContents(Adherent $member): array
     {
-        return [];
+        /** @var Login $login */
+        global $login;
+
+        if (!$login->isAdmin() && !$login->isStaff()) {
+            return [];
+        }
+
+        return [
+            [
+                'label' => str_replace(
+                    '%membername',
+                    $member->sname,
+                    //TRANS %membername will be replaced with current member name
+                    _T("New subscription for %membername", "activities")
+                ),
+                'route' => [
+                    'name' => 'activities_subscription_add',
+                    'args' => [Adherent::PK => $member->id]
+                ],
+                'icon' => 'money check alternate grey'
+            ],
+        ];
     }
 
     /**

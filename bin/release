@@ -368,19 +368,6 @@ def add_libs(rel_name, galette_archive):
     galette.extractall(path=src_dir)
     galette.close()
 
-    npm_dir = os.path.join(src_dir, rel_name)
-    npm_cmd = 'npm install --prefix %s' % npm_dir
-    print(npm_cmd)
-    p1 = subprocess.Popen(npm_cmd, shell=True, cwd=npm_dir)
-    p1.wait()
-
-    wp_cmd = 'npm run-script build-dist'
-    p1 = subprocess.Popen(wp_cmd, shell=True, cwd=npm_dir)
-    p1.wait()
-
-    shutil.rmtree(os.path.join(npm_dir, 'bin'))
-    os.remove(os.path.join(npm_dir, '.gitignore'))
-
     composer_dir = os.path.join(src_dir, rel_name)
     has_composer = os.path.exists(
         os.path.join(

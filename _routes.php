@@ -78,7 +78,7 @@ $app->post(
 )->setName('activities_filter-subscriptionslist')->add($authenticate);
 
 $app->get(
-    '/subscription/add',
+    '/subscription/add[/{id_adh:\d+}]',
     [SubscriptionsController::class, 'add']
 )->setName(
     'activities_subscription_add'
