@@ -6,16 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-09-10 22:29+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-12-28 06:40+0000\n"
+"Last-Translator: தமிழ்நேரம் <anishprabu.t@gmail.com>\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/galette/"
+"plugins-activities/ta/>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10-dev\n"
 
 #: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:127
 msgid "Activities management"
@@ -49,34 +51,34 @@ msgstr ""
 
 #: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:146
 msgid "Subscriptions management"
-msgstr ""
+msgstr "சந்தா மேலாண்மை"
 
 #: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:271
 #: ../tempcache/subscriptions.html.twig:206
 msgid "Subscription"
-msgstr ""
+msgstr "சந்தா"
 
 #: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:374
 msgid "New subscription has been successfully added."
-msgstr ""
+msgstr "புதிய சந்தா வெற்றிகரமாக சேர்க்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:376
 msgid "Subscription has been modified."
-msgstr ""
+msgstr "சந்தா மாற்றியமைக்கப்பட்டுள்ளது."
 
 #: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:384
 msgid "An error occurred while storing the subscription."
-msgstr ""
+msgstr "சந்தாவை சேமிக்கும் போது பிழை ஏற்பட்டது."
 
 #: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:393
 msgid "Do not forget to store the subscription"
-msgstr ""
+msgstr "சந்தாவை சேமிக்க மறக்காதீர்கள்"
 
 #. TRANS: %1$s is the member name, %2$s the activity name.
 #: ../lib/GaletteActivities/Controllers/Crud/SubscriptionsController.php:496
 #, php-format
 msgid "Remove subscription for %1$s on %2$s"
-msgstr ""
+msgstr "%2$s இல் %1$s க்கான சந்தாவை அகற்று"
 
 #: ../lib/GaletteActivities/PluginGaletteActivities.php:51
 #: ../lib/GaletteActivities/PluginGaletteActivities.php:55
@@ -85,12 +87,12 @@ msgstr ""
 
 #: ../lib/GaletteActivities/PluginGaletteActivities.php:62
 msgid "Subscriptions"
-msgstr ""
+msgstr "சந்தாக்கள்"
 
 #. TRANS %membername will be replaced with current member name
 #: ../lib/GaletteActivities/PluginGaletteActivities.php:117
 msgid "New subscription for %membername"
-msgstr ""
+msgstr "%உறுப்பினர் பெயருக்கான புதிய சந்தா"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:182
 msgid "Name is mandatory"
@@ -98,7 +100,7 @@ msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Activity.php:189
 msgid "Type is too long"
-msgstr ""
+msgstr "வகை மிக நீளமானது"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:267
 msgid "Activity added"
@@ -120,7 +122,7 @@ msgstr ""
 #: ../lib/GaletteActivities/Entity/Activity.php:416
 #: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:167
 msgid "Type"
-msgstr ""
+msgstr "வகை"
 
 #: ../lib/GaletteActivities/Entity/Activity.php:420
 #: ../tempcache/activities.html.twig:100 ../tempcache/activities.html.twig:173
@@ -147,7 +149,7 @@ msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:189
 msgid "Activity is mandatory"
-msgstr ""
+msgstr "செயல்பாடு கட்டாயமாகும்"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:218
 msgid "Member is mandatory"
@@ -155,27 +157,27 @@ msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:228
 msgid "Subscription date is mandatory"
-msgstr ""
+msgstr "சந்தா தேதி கட்டாயமாகும்"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:234
 msgid "End date is mandatory"
-msgstr ""
+msgstr "இறுதி தேதி கட்டாயமாகும்"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:292
 msgid "Subscription added"
-msgstr ""
+msgstr "சந்தா சேர்க்கப்பட்டது"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:302
 msgid "Fail to add new subscription."
-msgstr ""
+msgstr "புதிய சந்தாவைச் சேர்க்கத் தவறியது."
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:321
 msgid "Subscription updated"
-msgstr ""
+msgstr "சந்தா புதுப்பிக்கப்பட்டது"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:330
 msgid "Subscription already exists for this member and activity"
-msgstr ""
+msgstr "இந்த உறுப்பினர் மற்றும் செயல்பாட்டிற்கு சந்தா ஏற்கனவே உள்ளது"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:569
 msgid "Member"
@@ -183,7 +185,7 @@ msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:573
 msgid "Is paid"
-msgstr ""
+msgstr "செலுத்தப்படுகிறது"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:577
 #: ../tempcache/subscriptions.html.twig:103
@@ -194,14 +196,14 @@ msgstr ""
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:581
 msgid "Payment method"
-msgstr ""
+msgstr "கட்டண முறை"
 
 #: ../lib/GaletteActivities/Entity/Subscription.php:589
 #: ../tempcache/subscriptions.html.twig:103
 #: ../tempcache/subscriptions.html.twig:433
 #: ../tempcache/subscription.html.twig:77
 msgid "Subscription date"
-msgstr ""
+msgstr "சந்தா தேதி"
 
 #: ../tempcache/activities.html.twig:62
 #, php-format
@@ -232,12 +234,12 @@ msgstr ""
 #, php-format
 msgid "%1$s subscription"
 msgid_plural "%1$s subscriptions"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$s சந்தா"
+msgstr[1] "%1$s சந்தாக்கள்"
 
 #: ../tempcache/subscriptions.html.twig:90
 msgid "New subscription"
-msgstr ""
+msgstr "புதிய சந்தா"
 
 #: ../tempcache/subscriptions.html.twig:103
 #: ../tempcache/subscriptions.html.twig:441
@@ -256,11 +258,11 @@ msgstr ""
 
 #: ../tempcache/subscriptions.html.twig:130
 msgid "All activities"
-msgstr ""
+msgstr "அனைத்து நடவடிக்கைகளும்"
 
 #: ../tempcache/subscriptions.html.twig:159
 msgid "Search or pick a member"
-msgstr ""
+msgstr "ஒரு உறுப்பினரைத் தேடுங்கள் அல்லது தேர்வு செய்யுங்கள்"
 
 #: ../tempcache/subscriptions.html.twig:167
 msgid "All payment types"
@@ -268,15 +270,15 @@ msgstr ""
 
 #: ../tempcache/subscriptions.html.twig:175
 msgid "Date type"
-msgstr ""
+msgstr "தேதி வகை"
 
 #: ../tempcache/subscriptions.html.twig:186
 msgid "Creation"
-msgstr ""
+msgstr "உருவாக்கம்"
 
 #: ../tempcache/subscriptions.html.twig:252
 msgid "Paid subscription:"
-msgstr ""
+msgstr "கட்டண சந்தா:"
 
 #: ../tempcache/subscriptions.html.twig:298
 #: ../tempcache/subscriptions.html.twig:460
@@ -288,11 +290,11 @@ msgstr ""
 #: ../tempcache/subscriptions.html.twig:350
 #, php-format
 msgid "Found subscriptions total %f"
-msgstr ""
+msgstr "மொத்தம் %f சந்தாக்கள் கிடைத்தன"
 
 #: ../tempcache/subscriptions.html.twig:506
 msgid "Edit subscription"
-msgstr ""
+msgstr "சந்தாவைத் திருத்தவும்"
 
 #: ../tempcache/subscriptions.html.twig:518
 msgid "Remove from database"
@@ -300,7 +302,7 @@ msgstr ""
 
 #: ../tempcache/subscriptions.html.twig:548
 msgid "No subscription has been found"
-msgstr ""
+msgstr "சந்தா எதுவும் கிடைக்கவில்லை"
 
 #: ../tempcache/activity.html.twig:64
 msgid "General information"
@@ -308,19 +310,19 @@ msgstr ""
 
 #: ../tempcache/activity.html.twig:124
 msgid "Attach to group"
-msgstr ""
+msgstr "குழுவுடன் இணைக்கவும்"
 
 #: ../tempcache/activity.html.twig:124
 msgid "Group to attach members that subscribes to activity."
-msgstr ""
+msgstr "செயல்பாட்டிற்கு குழுசேரும் உறுப்பினர்களை இணைக்க குழு."
 
 #: ../tempcache/subscription.html.twig:64
 msgid "Subscription information"
-msgstr ""
+msgstr "சந்தா செய்தி"
 
 #: ../tempcache/subscription.html.twig:88
 msgid "Select an activity"
-msgstr ""
+msgstr "ஒரு செயல்பாட்டைத் தேர்ந்தெடுக்கவும்"
 
 #: ../tempcache/subscription.html.twig:131
 msgid "Financial information"
