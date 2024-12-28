@@ -53,14 +53,14 @@ class SubscriptionsList extends Pagination
     public const DATE_SUBSCRIPTION = 1;
     public const DATE_CREATION = 2;
     //filters
-    private string|int|null $activity_filter;
-    private string|int|null $member_filter;
+    private string|int|null $activity_filter; //@phpstan-ignore-line
+    private string|int|null $member_filter; //@phpstan-ignore-line
 
-    private int|string $paid_filter;
+    private int|string $paid_filter; //@phpstan-ignore-line
     private int $payment_type_filter;
     private ?int $date_field = null;
-    private ?string $start_date_filter;
-    private ?string $end_date_filter;
+    private ?string $start_date_filter; //@phpstan-ignore-line
+    private ?string $end_date_filter; //@phpstan-ignore-line
 
     /** @var array<int> */
     private array $selected;

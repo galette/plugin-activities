@@ -64,7 +64,7 @@ class Activity
      *                                                      a specific activity, or null to just
      *                                                      instanciate object
      */
-    public function __construct(Db $zdb, int|ArrayObject $args = null)
+    public function __construct(Db $zdb, int|ArrayObject|null $args = null)
     {
         $this->zdb = $zdb;
         $this->setFields();

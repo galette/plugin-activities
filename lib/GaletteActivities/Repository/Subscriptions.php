@@ -61,7 +61,7 @@ class Subscriptions
      * @param Db                 $zdb     Database instance
      * @param ?SubscriptionsList $filters Filtering
      */
-    public function __construct(Db $zdb, SubscriptionsList $filters = null)
+    public function __construct(Db $zdb, ?SubscriptionsList $filters = null)
     {
         $this->zdb = $zdb;
 
@@ -319,7 +319,7 @@ class Subscriptions
      *
      * @return array<string> SQL ORDER clauses
      */
-    private function buildOrderClause(array $fields = null): array
+    private function buildOrderClause(?array $fields = null): array
     {
         $order = array();
 

@@ -61,7 +61,7 @@ class SubscriptionsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function add(Request $request, Response $response, int $id_adh = null): Response
+    public function add(Request $request, Response $response, ?int $id_adh = null): Response
     {
         return $this->edit($request, $response, null, 'add', $id_adh);
     }
@@ -92,7 +92,7 @@ class SubscriptionsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function list(Request $request, Response $response, string $option = null, string|int $value = null): Response
+    public function list(Request $request, Response $response, ?string $option = null, string|int|null $value = null): Response
     {
         $filters = $this->session->{$this->getFilterName($this->getDefaultFilterName())} ?? new SubscriptionsList();
 
@@ -250,7 +250,7 @@ class SubscriptionsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function edit(Request $request, Response $response, int $id = null, string $action = 'edit', int $id_adh = null): Response
+    public function edit(Request $request, Response $response, ?int $id = null, string $action = 'edit', ?int $id_adh = null): Response
     {
         $route_params = [];
 
@@ -332,7 +332,7 @@ class SubscriptionsController extends AbstractPluginController
      *
      * @return Response
      */
-    public function doEdit(Request $request, Response $response, int $id = null, string $action = 'edit'): Response
+    public function doEdit(Request $request, Response $response, ?int $id = null, string $action = 'edit'): Response
     {
         $post = $request->getParsedBody();
         $subscription = new Subscription($this->zdb);
