@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: translations@galette.eu\n"
 "POT-Creation-Date: 2024-09-10 22:29+0200\n"
-"PO-Revision-Date: 2026-09-03 09:49+0000\n"
+"PO-Revision-Date: 2026-09-03 10:56+0000\n"
 "Last-Translator: Johan Cwiklinski <trasher@x-tnd.be>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/galette/"
 "plugins-activities/pt/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:127
 msgid "Activities management"
-msgstr ""
+msgstr "Gestão de atividades"
 
 #: ../lib/GaletteActivities/Controllers/Crud/ActivitiesController.php:199
 #: ../lib/GaletteActivities/Entity/Subscription.php:565
