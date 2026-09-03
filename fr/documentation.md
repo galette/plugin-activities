@@ -3,23 +3,24 @@ title: Documentation
 description: Activities management
 ---
 
-This plugin was developed for [Association
-l'Aphyllanthe](https://www.aphyllanthe.fr/). It provides:
+Ce plugin a été développé pour [l'Association
+l'Aphyllanthe](https://www.aphyllanthe.fr/). Il fournit :
 
-* activities management,
-* subscriptions management.
+* gestion d'activités,
+* gestion de souscriptions.
 
 ## Installation
 
-First of all, download the plugin:
+Tout d'abord, téléchargez le plugin :
 
 * [Get latest Activities
   plugin!](https://github.com/galette-plugins/plugin-activities/releases/latest)
 * [Get Activities plugin nightly
   build!](https://github.com/galette-plugins/plugin-activities/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Extrayez l'archive téléchargée dans le dossier `plugins` de Galette. Par
+exemple, sous linux (en remplaçant `{url}` et `{version}` par les valeurs
+adéquates) :
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,10 +28,10 @@ $ wget {url}
 $ tar xjvf galette-plugin-activities-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Initialisation de la base de données
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Pour fonctionner, ce plugin requiert des tables dans la base de données.
+Référez-vous [à l'interface de gestion des plugins de
+Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; Activities plugin is installed :)
+Et c'est fini; le plugin Activités est installé :)
