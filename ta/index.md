@@ -9,8 +9,8 @@ subscriptions members take on them.
 This plugin was developed for [Association
 l'Aphyllanthe](https://www.aphyllanthe.fr/). It provides:
 
-* activities management,
-* subscriptions management.
+* செயல்பாடுகள் மேலாண்மை,
+* சந்தா மேலாண்மை.
 
 * [documentation](documentation.html)
 * [bugs and
