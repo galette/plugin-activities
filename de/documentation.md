@@ -1,17 +1,17 @@
 ---
-title: Documentation
+title: Dokumentation
 description: Activities management
 ---
 
 This plugin was developed for [Association
 l'Aphyllanthe](https://www.aphyllanthe.fr/). It provides:
 
-* activities management,
-* subscriptions management.
+* aktivitäts managment,
+* abo verwaltung.
 
 ## Installation
 
-First of all, download the plugin:
+Als erstes, Lade das Plugin herunter:
 
 * [Get latest Activities
   plugin!](https://github.com/galette-plugins/plugin-activities/releases/latest)
@@ -27,10 +27,10 @@ $ wget {url}
 $ tar xjvf galette-plugin-activities-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Datenbank Initialisierung
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
+Damit es Funktioniert, benötigt dieses Plugin verschiedene Tabellen in der
+Datenbank. Weiteres sehen sie hier [Galette plugins management
 interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; Activities plugin is installed :)
+Beendet; Aktivitäten Plugin ist Installiert :)
