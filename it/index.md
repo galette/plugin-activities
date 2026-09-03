@@ -6,11 +6,11 @@ description: Activities management
 A [Galette](https://galette.eu) plugin to manage activities and the
 subscriptions members take on them.
 
-This plugin was developed for [Association
-l'Aphyllanthe](https://www.aphyllanthe.fr/). It provides:
+Questo plugin è stato sviluppato per [Association
+l'Aphyllanthe](https://www.aphyllanthe.fr/). Fornisce:
 
-* activities management,
-* subscriptions management.
+* gestione attività,
+* gestione iscrizioni.
 
 * [documentation](documentation.html)
 * [bugs and
