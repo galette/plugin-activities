@@ -1,25 +1,25 @@
 ---
-title: Documentation
+title: Документація
 description: Activities management
 ---
 
-This plugin was developed for [Association
-l'Aphyllanthe](https://www.aphyllanthe.fr/). It provides:
+Цей плагін розроблено для [Association
+l'Aphyllanthe](https://www.aphyllanthe.fr/). Він забезпечує:
 
-* activities management,
-* subscriptions management.
+* управління діяльністю,
+* управління підписками.
 
-## Installation
+## Встановлення
 
-First of all, download the plugin:
+Перш за все, завантажте плагін:
 
 * [Get latest Activities
   plugin!](https://github.com/galette-plugins/plugin-activities/releases/latest)
 * [Get Activities plugin nightly
   build!](https://github.com/galette-plugins/plugin-activities/releases/tag/nightly)
 
-Extract the downloaded archive in Galette `plugins` directory. For example,
-under linux (replacing `{url}` and `{version}` with correct values):
+Розпакуйте завантажений архів у каталог Galette `plugins`. Наприклад, під Linux
+(замінивши `{url}` і `{version}` на правильні значення):
 
 ```bash
 $ cd /var/www/html/galette/plugins
@@ -27,10 +27,10 @@ $ wget {url}
 $ tar xjvf galette-plugin-activities-{version}.tar.bz2
 ```
 
-## Database initialisation
+## Ініціалізація бази даних
 
-In order to work, this plugin requires several tables in the database. See
-[Galette plugins management
-interface](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
+Для роботи цього плагіна потрібно кілька таблиць у базі даних. Перегляньте
+[Інтерфейс керування плагінами
+Galette](https://doc.galette.eu/en/master/plugins/index.html#plugins-managment).
 
-And this is finished; Activities plugin is installed :)
+І це закінчено; Плагін Activities встановлено :)
