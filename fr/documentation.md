@@ -1,6 +1,6 @@
 ---
 title: Documentation
-description: Activities management
+description: Gestion des activités
 ---
 
 Ce plugin a été développé pour [l'Association
@@ -13,10 +13,10 @@ l'Aphyllanthe](https://www.aphyllanthe.fr/). Il fournit :
 
 Tout d'abord, téléchargez le plugin :
 
-* [Get latest Activities
-  plugin!](https://github.com/galette-plugins/plugin-activities/releases/latest)
-* [Get Activities plugin nightly
-  build!](https://github.com/galette-plugins/plugin-activities/releases/tag/nightly)
+* [Obtenir le dernier plugin Activities
+  !](https://github.com/galette-plugins/plugin-activities/releases/latest)
+* [Obtenir la nightly du plugin Activities
+  !](https://github.com/galette-plugins/plugin-activities/releases/tag/nightly)
 
 Extrayez l'archive téléchargée dans le dossier `plugins` de Galette. Par
 exemple, sous linux (en remplaçant `{url}` et `{version}` par les valeurs
