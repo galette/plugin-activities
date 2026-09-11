@@ -20,8 +20,8 @@ l'Aphyllanthe](https://www.aphyllanthe.fr/). Il fournit :
   [utilisateurs](https://lists.mailman3.com/postorius/lists/galette-users.mailman3.com/),
   [développeurs](https://lists.mailman3.com/postorius/lists/galette-devel.mailman3.com/)
 
-To use it you need a recent enough Galette — the required version is shown at
-the top of this page — and the plugin itself, either by:
+Pour l'utiliser, vous avez besoin d'une Galette assez récente — la version
+requise est affichée en haut de cette page — et le plugin lui-même, soit par :
 
 * le télécharger à l'aide des boutons en haut de la page,
 * ou utiliser le [code source depuis le
